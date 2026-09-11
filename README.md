@@ -1,1 +1,36 @@
-# elh_landingpage
+# ELH landing page
+
+Next.js landing page for [elh.vn](https://elh.vn/).
+
+## Local development
+
+```bash
+corepack enable
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+## Production build
+
+```bash
+pnpm build
+```
+
+The site is exported as static HTML to `out/`.
+
+## Cloudflare Pages
+
+- Production branch: `main`
+- Build command: `pnpm build`
+- Build output directory: `out`
+- Package manager: `pnpm@8.15.9` (pinned in `package.json`)
+
+Cloudflare creates a preview deployment for non-production branches and deploys
+production automatically when a change is merged into `main`.
+
+Before moving `elh.vn` to Cloudflare nameservers, copy and verify every existing
+DNS record. In particular, preserve the MX, SPF, DKIM, `mail`, `smtp`, `imap`,
+and `pop` records used by the separate email service.
+
+To roll back a bad release, select a known-good deployment in Cloudflare Pages,
+or revert the offending Git commit and push/merge the revert into `main`.

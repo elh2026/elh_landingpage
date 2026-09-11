@@ -2,9 +2,10 @@
   "name": "landingpage",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.15.9",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && cp -r public/* ./ || true",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "check": "prettier --check --plugin prettier-plugin-tailwindcss --ignore-path .gitignore .",
@@ -59,5 +60,11 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.2.9",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
