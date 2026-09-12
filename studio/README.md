@@ -1,6 +1,6 @@
 # ELH Content Studio
 
-Trang quản trị nội dung dành cho marketing, dự kiến chạy tại `https://admin.elh.vn`.
+Trang quản trị nội dung dành cho marketing, đang chạy tại `https://admin.elh.vn`.
 
 ## Cấu hình local
 
@@ -19,9 +19,8 @@ Không commit `.env.local`, token hoặc Deploy Hook URL vào Git.
 
 ## Production
 
-Studio chỉ được deploy sau khi:
-
-- schema đã deploy vào đúng Sanity project;
-- `admin.elh.vn` đã được bảo vệ bằng Cloudflare Access;
-- danh sách email và vai trò đã được xác nhận;
-- build local và Wrangler dry-run đều thành công.
+- Schema đã được deploy vào Sanity project `cm9sdebg`.
+- Studio đã được deploy bằng Worker `elh-admin` và custom domain `admin.elh.vn`.
+- Người dùng phải đăng nhập bằng tài khoản cá nhân đã được mời vào Sanity project; không dùng mật khẩu chung.
+- Cloudflare Access chưa bật vì bước khởi tạo Zero Trust của tài khoản hiện yêu cầu thông tin thanh toán. Có thể bổ sung sau mà không cần đổi CMS.
+- Webhook chỉ build lại website khi nội dung `product` hoặc `article` được publish, cập nhật hoặc unpublish; thay đổi bản nháp không kích hoạt build.
