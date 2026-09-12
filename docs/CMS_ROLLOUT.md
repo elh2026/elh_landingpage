@@ -15,9 +15,9 @@ The public site must continue serving its existing hard-coded content until CMS 
 2. Configure a public `production` dataset. Published documents are public; drafts remain authenticated.
 3. Deploy the schema and add individual project members.
 4. Build and test the Studio locally.
-5. Create a separate `elh-admin` Worker for the Studio.
-6. Protect `admin.elh.vn` with Cloudflare Access before exposing it to marketing.
-7. Deploy the Studio and test allowed and denied identities.
+5. Create a separate `elh-adminlk-admin` Worker for the Studio.
+6. Deploy the Studio and require individual Sanity project accounts for access.
+7. Add Cloudflare Access later if Zero Trust onboarding becomes available for the account.
 8. Integrate read-only CMS queries into the public site with legacy fallback.
 9. Migrate and review content.
 10. Enable the publish webhook only after the production build passes.
@@ -25,7 +25,8 @@ The public site must continue serving its existing hard-coded content until CMS 
 ## Access policy
 
 - Use individual identities, never a shared password.
-- Cloudflare Access allowlist controls who can reach `admin.elh.vn`.
+- `admin.elh.vn` currently relies on Sanity authentication and project membership; it does not use a shared password.
+- Cloudflare Access is deferred because this Cloudflare account could not complete Zero Trust onboarding without payment details.
 - Sanity roles control who can draft, publish, or administer content.
 - Require MFA on GitHub and the identity provider used for Sanity.
 
