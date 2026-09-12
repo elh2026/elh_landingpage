@@ -1,7 +1,6 @@
 'use client'
 
 import { Controller, useForm } from 'react-hook-form'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 import Container from '@/components/Container'
 import Input from '@/components/Input'
@@ -14,10 +13,6 @@ type FormValues = {
 }
 
 const Contact = () => {
-  const onChange = (value: string | null) => {
-    console.log('Captcha value:', value)
-  }
-
   const {
     control,
     handleSubmit,
@@ -84,9 +79,6 @@ const Contact = () => {
           </div>
 
           <div className="h-full">
-            <div>
-              <ReCAPTCHA sitekey="6LeycWcrAAAAALjr9AujJyOpjZr9FC1IYx6yRiq-" onChange={onChange} />,
-            </div>
             <div>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.340807743716!2d106.6423876759785!3d10.861662157613834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ec384211b7%3A0xdcaa7467b51e4f3b!2zMjMvM0EgxJAuIFRUSDIxLCBUw6JuIFRo4bubaSBIaeG7h3AsIFF14bqtbiAxMiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1770395419123!5m2!1sen!2s"
