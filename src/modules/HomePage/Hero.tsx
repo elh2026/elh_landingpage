@@ -45,10 +45,11 @@ const Hero = () => {
             <div className="relative isolate h-[calc(100vh-600px)] p-1 lg:h-[800px]">
               <div className={cn('absolute-center z-[-1] h-full w-full brightness-[30%] md:brightness-50')}>
                 <Image
-                  priority
+                  priority={i === 0}
                   className="object-cover md:object-center"
-                  src={`/images/photos/tong-hop-${i + 8}.jpg`}
+                  src={`/images/photos/hero-${i + 1}.webp`}
                   fill
+                  sizes="(min-width: 1280px) 1280px, 100vw"
                   alt=""
                 />
               </div>
