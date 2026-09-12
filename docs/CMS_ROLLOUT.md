@@ -15,7 +15,7 @@ The public site must continue serving its existing hard-coded content until CMS 
 2. Configure a public `production` dataset. Published documents are public; drafts remain authenticated.
 3. Deploy the schema and add individual project members.
 4. Build and test the Studio locally.
-5. Create a separate `elh-adminlk-admin` Worker for the Studio.
+5. Create a separate `elh-admin` Worker for the Studio.
 6. Deploy the Studio and require individual Sanity project accounts for access.
 7. Add Cloudflare Access later if Zero Trust onboarding becomes available for the account.
 8. Integrate read-only CMS queries into the public site with legacy fallback.
