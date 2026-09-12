@@ -8,6 +8,9 @@
     "build": "sanity build",
     "typecheck": "tsc --noEmit",
     "schema:deploy": "sanity schemas deploy",
+    "legacy:dry-run": "sanity exec scripts/migrateLegacyContent.ts --with-user-token -- --dry-run",
+    "legacy:import": "sanity exec scripts/migrateLegacyContent.ts --with-user-token",
+    "legacy:verify": "sanity exec scripts/verifyLegacyContent.ts --with-user-token",
     "deploy:cloudflare": "pnpm build && wrangler deploy",
     "preview:cloudflare": "wrangler dev"
   },

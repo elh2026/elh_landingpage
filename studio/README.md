@@ -24,3 +24,12 @@ Không commit `.env.local`, token hoặc Deploy Hook URL vào Git.
 - Người dùng phải đăng nhập bằng tài khoản cá nhân đã được mời vào Sanity project; không dùng mật khẩu chung.
 - Cloudflare Access chưa bật vì bước khởi tạo Zero Trust của tài khoản hiện yêu cầu thông tin thanh toán. Có thể bổ sung sau mà không cần đổi CMS.
 - Webhook chỉ build lại website khi nội dung `product` hoặc `article` được publish, cập nhật hoặc unpublish; thay đổi bản nháp không kích hoạt build.
+
+## Dữ liệu cũ
+
+- `pnpm legacy:dry-run`: đọc và kiểm tra dữ liệu cứng trong source, không ghi vào Sanity.
+- `pnpm legacy:import`: tải ảnh và tạo dữ liệu cũ dưới dạng draft; chạy lại không tạo document trùng.
+- `pnpm legacy:verify`: đối chiếu số lượng và toàn bộ tham chiếu ảnh sau khi nhập.
+
+Trước lần nhập ngày 12-09-2026, dataset đã được sao lưu tại
+`D:\saveVSCode\Web Po teo\backups\elh-sanity\production-pre-legacy-import-2026-09-12.tar.gz`.
