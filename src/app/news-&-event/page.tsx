@@ -1,5 +1,9 @@
+import ArticleList from '@/modules/CmsContent/ArticleList'
 import NewsNEventPage from '@/modules/NewsNEventPage'
+import { getPublishedArticles } from '@/sanity/queries'
 
-export default function NewsNEvent() {
+export default async function NewsNEvent() {
+  const articles = await getPublishedArticles()
+  if (articles.length) return <ArticleList articles={articles} title="Tin tức & Sự kiện" />
   return <NewsNEventPage />
 }

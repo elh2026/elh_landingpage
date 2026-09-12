@@ -28,7 +28,7 @@ const Header = () => {
     },
     {
       label: 'Sản phẩm',
-      href: '#',
+      href: '/products',
       children: [
         { label: 'Xy lanh, thiết bị khí nén', href: 'janatics', children: [], clickable: true },
         { label: 'Đá cắt, vật tư tiêu hao', href: 'cutflex', children: [], clickable: true },

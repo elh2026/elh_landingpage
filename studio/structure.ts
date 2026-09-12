@@ -1,4 +1,9 @@
-import { BlockContentIcon, CogIcon, DocumentsIcon, PackageIcon, TagIcon, UsersIcon } from '@sanity/icons'
+import { BlockContentIcon } from '@sanity/icons/BlockContent'
+import { CogIcon } from '@sanity/icons/Cog'
+import { DocumentsIcon } from '@sanity/icons/Documents'
+import { PackageIcon } from '@sanity/icons/Package'
+import { TagIcon } from '@sanity/icons/Tag'
+import { UsersIcon } from '@sanity/icons/Users'
 import type { StructureResolver } from 'sanity/structure'
 
 export const structure: StructureResolver = (S) =>

@@ -39,7 +39,12 @@ const iCielGotham = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'ELH - Every Little Helps',
+  metadataBase: new URL('https://elh.vn'),
+  title: {
+    default: 'ELH - Every Little Helps',
+    template: '%s | ELH',
+  },
+  description: 'ELH cung cấp thiết bị và giải pháp kỹ thuật công nghiệp.',
 }
 
 export default function RootLayout({
@@ -48,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <head>
         <script
           dangerouslySetInnerHTML={{

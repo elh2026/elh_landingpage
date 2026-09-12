@@ -15,12 +15,24 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3.3.1
         version: 3.3.6
+      '@portabletext/react':
+        specifier: 8.0.1
+        version: 8.0.1(react@19.2.8)
+      '@portabletext/types':
+        specifier: 4.0.2
+        version: 4.0.2
       '@radix-ui/react-accordion':
         specifier: ^1.2.11
         version: 1.2.20(@types/react-dom@19.2.4)(@types/react@19.2.18)(react-dom@19.2.8)(react@19.2.8)
       '@radix-ui/react-navigation-menu':
         specifier: ^1.2.13
         version: 1.2.22(@types/react-dom@19.2.4)(@types/react@19.2.18)(react-dom@19.2.8)(react@19.2.8)
+      '@sanity/client':
+        specifier: 8.6.1
+        version: 8.6.1
+      '@sanity/image-url':
+        specifier: 2.1.1
+        version: 2.1.1
       '@types/react-google-recaptcha':
         specifier: ^2.1.9
         version: 2.1.9
