@@ -1,0 +1,28 @@
+{
+  "name": "elh-content-studio",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@8.15.9",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "typecheck": "tsc --noEmit",
+    "schema:deploy": "sanity schemas deploy",
+    "deploy:cloudflare": "pnpm build && wrangler deploy",
+    "preview:cloudflare": "wrangler dev"
+  },
+  "dependencies": {
+    "@sanity/icons": "5.2.2",
+    "@sanity/vision": "6.13.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sanity": "6.13.2",
+    "styled-components": "6.1.19"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "typescript": "5.9.3",
+    "wrangler": "4.131.1"
+  }
+}
