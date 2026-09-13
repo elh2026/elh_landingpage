@@ -65,6 +65,22 @@ export const articleType = defineType({
     }),
     defineField({ name: 'authorName', title: 'Tác giả', type: 'string', group: 'organization' }),
     defineField({
+      name: 'section',
+      title: 'Loại bài viết',
+      description: 'Quyết định bài viết xuất hiện trong mục nào của menu Tư vấn.',
+      type: 'string',
+      group: 'organization',
+      initialValue: 'news',
+      options: {
+        layout: 'radio',
+        list: [
+          { title: 'Tin tức & sự kiện', value: 'news' },
+          { title: 'Tin tuyển dụng', value: 'recruitment' },
+        ],
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'featured',
       title: 'Bài viết nổi bật',
       type: 'boolean',
@@ -76,6 +92,13 @@ export const articleType = defineType({
   ],
   orderings: [{ title: 'Mới nhất', name: 'publishedDesc', by: [{ field: 'publishedAt', direction: 'desc' }] }],
   preview: {
-    select: { title: 'title', subtitle: 'authorName', media: 'coverImage.image' },
+    select: { title: 'title', author: 'authorName', section: 'section', featured: 'featured', media: 'coverImage.image' },
+    prepare: ({ title, author, section, featured, media }) => ({
+      title,
+      subtitle: [section === 'recruitment' ? 'Tuyển dụng' : 'Tin tức', featured ? 'Nổi bật' : '', author]
+        .filter(Boolean)
+        .join(' • '),
+      media,
+    }),
   },
 })

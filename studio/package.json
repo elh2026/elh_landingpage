@@ -11,7 +11,11 @@
     "legacy:dry-run": "sanity exec scripts/migrateLegacyContent.ts --with-user-token -- --dry-run",
     "legacy:import": "sanity exec scripts/migrateLegacyContent.ts --with-user-token",
     "legacy:verify": "sanity exec scripts/verifyLegacyContent.ts --with-user-token",
-    "deploy:cloudflare": "pnpm build && wrangler deploy",
+    "legacy:publish-check": "sanity exec scripts/publishLegacyContent.ts --with-user-token",
+    "visual:complete": "sanity exec scripts/completeVisualContent.ts --with-user-token",
+    "webhook:ensure-pages": "sanity exec scripts/ensurePageWebhook.ts --with-user-token",
+    "visual:seed": "sanity exec scripts/seedVisualContent.ts --with-user-token",
+    "deploy:cloudflare": "sanity build && wrangler deploy",
     "preview:cloudflare": "wrangler dev"
   },
   "dependencies": {

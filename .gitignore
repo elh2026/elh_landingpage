@@ -16,6 +16,9 @@
 # next.js
 /.next/
 /out/
+/dist/
+/.vinext/
+/.next-static-build/
 
 # production
 /build
@@ -41,3 +44,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.wrangler/

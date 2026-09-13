@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "elh-preview",
+  "main": "vinext/server/fetch-handler",
+  "compatibility_date": "2026-09-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "routes": [{ "pattern": "preview.elh.vn", "custom_domain": true }],
+  "assets": { "directory": "./dist/client", "binding": "ASSETS", "not_found_handling": "none" },
+  "cache": { "enabled": true },
+  "version_metadata": { "binding": "CF_VERSION_METADATA" },
+  "vars": {
+    "ELH_PREVIEW_BUILD": "true",
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "cm9sdebg",
+    "NEXT_PUBLIC_SANITY_DATASET": "production",
+    "NEXT_PUBLIC_SANITY_API_VERSION": "2026-09-12",
+    "NEXT_PUBLIC_SANITY_STUDIO_URL": "https://admin.elh.vn"
+  },
+  "observability": {
+    "enabled": true,
+    "logs": { "enabled": true, "invocation_logs": true },
+    "traces": { "enabled": true, "head_sampling_rate": 0.1 }
+  }
+}

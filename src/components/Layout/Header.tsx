@@ -9,8 +9,9 @@ import Container from '../Container'
 import NavBar from './Navbar'
 import NavbarMobile from './NavbarMobile'
 import { A } from '../magicui/animated-grid-pattern'
+import type { CmsSiteSettings } from '@/sanity/types'
 
-const Header = () => {
+const Header = ({ settings }: { settings?: CmsSiteSettings | null }) => {
   const router = useRouter()
 
   const handleClick = (path: string) => {
@@ -163,7 +164,7 @@ const Header = () => {
       children: [
         { href: '/news-&-event', label: 'Tin tức & sự kiện' },
         { href: '/featured-news', label: 'Tin nổi bật' },
-        { href: '#', label: 'Tin tuyển dụng' },
+        { href: '/recruitment', label: 'Tin tuyển dụng' },
       ],
     },
     {
@@ -182,20 +183,20 @@ const Header = () => {
                 <Image src="/icons/map-blue.svg" width={15} height={15} alt="Map" />
               </div>
               <Link
-                href="https://maps.app.goo.gl/Bfk51u4gX9vk5tX8A"
+                href={settings?.mapsUrl || 'https://maps.app.goo.gl/Bfk51u4gX9vk5tX8A'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
               >
-                23/3a Đường TTH21, Phường Tân Thới Hiệp, TP.HCM
+                {settings?.address || '23/3A Đường TTH21, Phường Tân Thới Hiệp, TP.HCM'}
               </Link>
             </div>
             <div className="flex items-center gap-x-2">
               <div>
                 <Image src="/icons/phone-blue.svg" width={15} height={15} alt="Phone" />
               </div>
-              <Link href="tel:+84915706936" className="block">
-                (+84) 915 706 936
+              <Link href={`tel:${settings?.contactPhone || '+84915706936'}`} className="block">
+                {settings?.contactPhone || '(+84) 915 706 936'}
               </Link>
             </div>
             <div className="flex items-center gap-x-2">
@@ -229,8 +230,11 @@ const Header = () => {
       <div className="bg-white">
         <Container>
           <div className="text-elh-gray py-4">
-            <span className="font-semibold">Top Tags:</span> Cảm biến nhiệt độ | Đồng hồ lưu lượng | Bơm hoá chất | Đá
-            cắt | Bạc lót, vòng bi nhựa, ray trượt không dầu | Ổ cắm | Tủ điện chống cháy nổ | Khí nén
+            <span className="font-semibold">Top Tags:</span>{' '}
+            {(settings?.topTags?.length
+              ? settings.topTags
+              : ['Cảm biến nhiệt độ', 'Đồng hồ lưu lượng', 'Bơm hoá chất', 'Đá cắt', 'Bạc lót, vòng bi nhựa, ray trượt không dầu', 'Ổ cắm', 'Tủ điện chống cháy nổ', 'Khí nén']
+            ).join(' | ')}
           </div>
         </Container>
       </div>

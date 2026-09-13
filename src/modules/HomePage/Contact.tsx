@@ -12,7 +12,7 @@ type FormValues = {
   address: string
 }
 
-const Contact = () => {
+const Contact = ({ title, mapEmbedUrl }: { title?: string; mapEmbedUrl?: string }) => {
   const {
     control,
     handleSubmit,
@@ -28,7 +28,7 @@ const Contact = () => {
       <Container>
         <div className="block items-end space-y-8 gap-x-8 xl:flex xl:space-y-0">
           <div className="h-full flex-1 rounded-2xl bg-white px-4 py-8 lg:px-8 xl:py-4">
-            <p className="text-title pb-8">Liên hệ làm đại lý</p>
+            <p className="text-title pb-8">{title || 'Liên hệ làm đại lý'}</p>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid gap-x-4 gap-y-8 lg:grid-cols-2">
                 <Controller
@@ -81,7 +81,7 @@ const Contact = () => {
           <div className="h-full">
             <div>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.340807743716!2d106.6423876759785!3d10.861662157613834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ec384211b7%3A0xdcaa7467b51e4f3b!2zMjMvM0EgxJAuIFRUSDIxLCBUw6JuIFRo4bubaSBIaeG7h3AsIFF14bqtbiAxMiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1770395419123!5m2!1sen!2s"
+                src={mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.340807743716!2d106.6423876759785!3d10.861662157613834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ec384211b7%3A0xdcaa7467b51e4f3b!2zMjMvM0EgxJAuIFRUSDIxLCBUw6JuIFRo4bubaSBIaeG7h3AsIFF14bqtbiAxMiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1770395419123!5m2!1sen!2s"}
                 width={'100%'}
                 height={'100%'}
                 className="h-[200px] w-full border-0 xl:w-[500px]"

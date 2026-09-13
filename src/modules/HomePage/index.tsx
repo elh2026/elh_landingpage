@@ -9,11 +9,13 @@ import Products from './Products'
 import Service from './Service'
 import Contact from './Contact'
 import { Constraction } from './Constraction'
+import type { CmsHomePage } from '@/sanity/types'
+import { urlFor } from '@/sanity/image'
 
-const HomePage = () => {
+const HomePage = ({ content, mapEmbedUrl }: { content?: CmsHomePage | null; mapEmbedUrl?: string }) => {
   return (
     <div>
-      <Hero />
+      <Hero slides={content?.heroSlides} />
       <div className="my-8 bg-white py-4">
         <Marquee pauseOnHover className="[--duration:60s] [--gap:3rem]">
           {Array.from({ length: 25 }).map((_, i) => (
@@ -23,12 +25,40 @@ const HomePage = () => {
           ))}
         </Marquee>
       </div>
-      <About />
-      <PoweredByTech />
+      {content?.introTitle || content?.introText ? (
+        <section className="mx-auto max-w-5xl px-6 py-16 text-center">
+          {content.introLogo?.image && (
+            <Image
+              src={urlFor(content.introLogo.image).width(420).url()}
+              width={306}
+              height={128}
+              className="mx-auto mb-8 h-auto"
+              alt={content.introLogo.alt || 'ELH'}
+            />
+          )}
+          <h2 className="text-title">{content.introTitle}</h2>
+          <p className="mt-4">{content.introText}</p>
+          {!!content.introImages?.length && (
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {content.introImages.map((item, index) => (
+                <div key={`${item.image.asset._ref}-${index}`} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                  <Image
+                    src={urlFor(item.image).width(640).height(480).url()}
+                    fill
+                    className="object-cover"
+                    alt={item.alt || ''}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      ) : <About />}
+      <PoweredByTech title={content?.productsTitle} />
 
       <Products />
-      <Service />
-      <Contact />
+      <Service title={content?.servicesTitle} services={content?.featuredServices} />
+      <Contact title={content?.contactTitle} mapEmbedUrl={mapEmbedUrl} />
     </div>
   )
 }

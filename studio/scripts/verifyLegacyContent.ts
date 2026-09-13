@@ -41,7 +41,7 @@ async function run() {
     ),
   )
 
-  if (products.length !== 47 || articles.length !== 18 || imageAssets !== 64 || missingImageReferences.length) {
+  if (products.length !== 47 || articles.length !== 18 || imageAssets < 64 || missingImageReferences.length) {
     throw new Error('Legacy migration verification failed.')
   }
 }

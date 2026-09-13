@@ -1,6 +1,6 @@
-@config "../../tailwind.config.ts";
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@config "../../tailwind.config.ts";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -153,7 +153,9 @@
   }
 
   body {
-    @apply text-primary-blue bg-[#F8F8F8] text-base;
+    @apply text-primary-blue bg-[#F8F8F8];
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   button {

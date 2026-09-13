@@ -422,7 +422,7 @@ export const meihe = [
   },
 ]
 
-const PoweredByTech = () => {
+const PoweredByTech = ({ title }: { title?: string }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const params = searchParams.get('product') || ''
@@ -591,7 +591,7 @@ const PoweredByTech = () => {
           <div className="bg-bg_factory h-[150px] bg-cover bg-position-[center_top] bg-no-repeat lg:h-[300px] lg:bg-position-[center_33%]" />
           <div className="flex items-center justify-between">
             <div className="font-iCielGotham">
-              <p className="text-2xl font-bold text-[#10415d] uppercase">ELH Technology</p>
+              <p className="text-2xl font-bold text-[#10415d] uppercase">{title || 'ELH Technology'}</p>
               <p className="text-primary-orange text-lg font-medium">Every Little Helps</p>
             </div>
             <div className="flex items-center gap-x-4">

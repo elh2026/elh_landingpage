@@ -1,12 +1,13 @@
 import Header from './Header'
 import Footer from './Footer'
+import type { CmsSiteSettings } from '@/sanity/types'
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children, settings }: { children: React.ReactNode; settings?: CmsSiteSettings | null }) => {
   return (
     <div className="overflow-x-clip">
-      <Header />
+      <Header settings={settings} />
       {children}
-      <Footer />
+      <Footer settings={settings} />
     </div>
   )
 }
