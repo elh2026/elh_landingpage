@@ -17,17 +17,27 @@ async function run() {
   const rebuildHook = hooks.find((hook) => hook.name === 'Cloudflare production rebuild')
   if (!rebuildHook) throw new Error('Cloudflare production rebuild webhook was not found.')
 
-  const drafts = await client.fetch<LegacyDocument[]>(
-    `*[_id in path("drafts.legacy-**") && _type in ["product", "article"]]`,
+  const documents = await client.fetch<LegacyDocument[]>(
+    `*[_type in ["product", "article"]]`,
     {},
     { perspective: 'raw' },
   )
-  const products = drafts.filter((document) => document._type === 'product')
-  const articles = drafts.filter((document) => document._type === 'article')
-  if (products.length !== 47 || articles.length !== 18) {
-    throw new Error(`Expected 47 products and 18 articles, found ${products.length} and ${articles.length}.`)
+  const legacyDocuments = documents.filter((document) =>
+    document._id.replace(/^drafts\./, '').startsWith('legacy-'),
+  )
+  const drafts = legacyDocuments.filter((document) => document._id.startsWith('drafts.legacy-'))
+  const allProducts = legacyDocuments.filter((document) => document._type === 'product')
+  const allArticles = legacyDocuments.filter((document) => document._type === 'article')
+  if (allProducts.length !== 47 || allArticles.length !== 18) {
+    throw new Error(
+      `Expected 47 total products and 18 total articles, found ${allProducts.length} and ${allArticles.length}.`,
+    )
   }
-  if (drafts.some((document) => !(document._type === 'product' ? document.mainImage : document.coverImage))) {
+  if (
+    legacyDocuments.some((document) =>
+      !(document._type === 'product' ? document.mainImage : document.coverImage),
+    )
+  ) {
     throw new Error('One or more legacy documents have no image.')
   }
   const hookWasEnabled = !rebuildHook.isDisabled
@@ -64,7 +74,7 @@ async function run() {
 
   const response = await fetch(rebuildHook.url, { method: 'POST' })
   if (!response.ok) throw new Error(`Cloudflare rebuild hook returned HTTP ${response.status}.`)
-  console.log(`Published ${products.length} products and ${articles.length} articles; requested one production rebuild.`)
+  console.log(`Published ${drafts.length} remaining legacy documents; requested one production rebuild.`)
 }
 
 run().catch((error) => {
