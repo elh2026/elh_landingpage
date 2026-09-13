@@ -6,6 +6,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import Container from '@/components/Container'
 import Input from '@/components/Input'
+import { getGoogleMapsEmbedUrl } from '@/lib/googleMaps'
 import type { CmsContactPage, CmsSiteSettings } from '@/sanity/types'
 import { urlFor } from '@/sanity/image'
 
@@ -191,7 +192,7 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
             <div className="h-full">
               <div>
                 <iframe
-                  src={content?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.340807743716!2d106.6423876759785!3d10.861662157613834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ec384211b7%3A0xdcaa7467b51e4f3b!2zMjMvM0EgxJAuIFRUSDIxLCBUw6JuIFRo4bubaSBIaeG7h3AsIFF14bqtbiAxMiwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1770395419123!5m2!1sen!2s"}
+                  src={getGoogleMapsEmbedUrl(content?.mapEmbedUrl)}
                   width={'100%'}
                   height={'100%'}
                   className="h-[200px] w-full border-0 xl:h-96 xl:w-11/12"
