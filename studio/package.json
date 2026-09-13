@@ -16,7 +16,7 @@
     "visual:complete": "sanity exec scripts/completeVisualContent.ts --with-user-token",
     "webhook:ensure-pages": "sanity exec scripts/ensurePageWebhook.ts --with-user-token",
     "visual:seed": "sanity exec scripts/seedVisualContent.ts --with-user-token",
-    "deploy:cloudflare": "sanity build && wrangler deploy",
+    "deploy:cloudflare": "sanity build && wrangler deploy --config wrangler.jsonc",
     "preview:cloudflare": "wrangler dev"
   },
   "dependencies": {
