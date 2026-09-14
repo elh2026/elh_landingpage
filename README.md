@@ -6,6 +6,7 @@ Next.js landing page for [elh.vn](https://elh.vn/).
 
 - [Hướng dẫn dạng Markdown](docs/HUONG-DAN-MARKETING-ELH.md)
 - [Hướng dẫn dạng PDF](docs/HUONG-DAN-MARKETING-ELH.pdf)
+- [Báo cáo cập nhật website](docs/BAO-CAO-CAP-NHAT-WEBSITE-ELH.pdf)
 
 ## Local development
 

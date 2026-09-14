@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Báo cáo cập nhật website ELH</title>
+    <style>
+      @page { size: A4; margin: 0; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: #e8edf3; color: #172b4d; font-family: Arial, "Segoe UI", sans-serif; }
+      .page { width: 210mm; height: 297mm; padding: 14mm 16mm 13mm; margin: 0 auto 8mm; background: #fff; position: relative; overflow: hidden; break-after: page; page-break-after: always; }
+      .page:last-child { break-after: auto; page-break-after: auto; }
+      .cover { background: linear-gradient(145deg, #0d1b34 0%, #173760 65%, #ef681f 65.2%, #fb812d 100%); color: #fff; padding: 22mm 18mm; }
+      .cover img { width: 48mm; height: auto; background: #fff; border-radius: 4mm; padding: 4mm; }
+      .cover h1 { color: #fff; font-size: 30pt; line-height: 1.08; margin: 34mm 0 6mm; max-width: 160mm; }
+      .cover .lead { font-size: 14pt; line-height: 1.5; max-width: 145mm; color: #dce8f8; }
+      .cover .meta { position: absolute; left: 18mm; bottom: 21mm; font-size: 10pt; line-height: 1.8; }
+      h1 { color: #142d53; font-size: 22pt; line-height: 1.15; margin: 0 0 6mm; }
+      h2 { color: #142d53; font-size: 13.5pt; margin: 5mm 0 2.5mm; }
+      h3 { color: #b54e00; font-size: 10.5pt; margin: 3mm 0 1.5mm; }
+      p, li, td, th { font-size: 9.1pt; line-height: 1.42; }
+      p { margin: 0 0 2.5mm; }
+      ul, ol { margin: 1.5mm 0 3.5mm 5mm; padding-left: 4mm; }
+      li { margin-bottom: 1.2mm; }
+      code { font-size: 8.3pt; background: #edf2f7; padding: .5mm 1mm; border-radius: 1mm; }
+      .eyebrow { color: #ef681f; text-transform: uppercase; letter-spacing: 1.5px; font-size: 8.3pt; font-weight: 700; margin-bottom: 2mm; }
+      .subtitle { color: #61738c; font-size: 10.4pt; margin-top: -3mm; margin-bottom: 6mm; }
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+      .card { border: 1px solid #d9e2ed; border-radius: 3.5mm; padding: 3.5mm; background: #fbfcfe; }
+      .card h3 { margin-top: 0; }
+      .blue { background: #f1f7fc; border-color: #b9d6ee; }
+      .orange { background: #fff7f0; border-color: #ffd0ad; }
+      .green { background: #eff9f3; border-color: #bde1ca; }
+      .red { background: #fff3f3; border-color: #efc1c1; }
+      .callout { border-left: 4px solid #ef681f; background: #fff6ef; border-radius: 0 3mm 3mm 0; padding: 3mm 4mm; margin: 3.5mm 0; }
+      .callout.info { border-left-color: #1670aa; background: #f0f7fc; }
+      .callout.warn { border-left-color: #c53232; background: #fff3f3; }
+      table { width: 100%; border-collapse: collapse; margin: 2.5mm 0 4mm; }
+      th { background: #173760; color: #fff; text-align: left; padding: 2.4mm; }
+      td { border-bottom: 1px solid #dbe3ed; padding: 2.3mm; vertical-align: top; }
+      .status { display: inline-block; border-radius: 99px; padding: 1mm 2.2mm; font-size: 7.7pt; font-weight: 700; white-space: nowrap; }
+      .done { background: #dff4e7; color: #176639; }
+      .pending { background: #fff0d9; color: #9a5200; }
+      .metric { border-radius: 3.5mm; padding: 4mm; color: #fff; background: #173760; }
+      .metric b { display: block; color: #ff8b3d; font-size: 21pt; line-height: 1.1; }
+      .metric span { font-size: 8.2pt; color: #dce8f8; }
+      .timeline { display: grid; gap: 2.5mm; }
+      .event { display: grid; grid-template-columns: 24mm 1fr; gap: 3mm; border-bottom: 1px solid #e1e7ef; padding-bottom: 2mm; }
+      .event strong { color: #ef681f; font-size: 8.5pt; }
+      .check { list-style: none; padding-left: 0; margin-left: 0; }
+      .check li::before { content: "✓"; color: #17834a; font-weight: 700; margin-right: 2mm; }
+      .pending-list { list-style: none; padding-left: 0; margin-left: 0; }
+      .pending-list li::before { content: "○"; color: #dc6b09; font-weight: 700; margin-right: 2mm; }
+      .flow { display: flex; align-items: center; gap: 2mm; margin: 4mm 0; }
+      .flow-box { flex: 1; text-align: center; border: 1px solid #cbd8e7; background: #f6f9fc; border-radius: 3mm; padding: 3mm 2mm; font-size: 8.3pt; font-weight: 700; }
+      .arrow { color: #ef681f; font-size: 15pt; font-weight: 700; }
+      .tag { display: inline-block; background: #e7eef8; color: #173760; padding: 1mm 2mm; border-radius: 1.5mm; font-size: 7.8pt; margin: 0 .7mm .7mm 0; }
+      .small { color: #687990; font-size: 8pt; }
+      .brandline { position: absolute; left: 16mm; bottom: 8mm; color: #ef681f; font-size: 8pt; font-weight: 700; }
+      .page-no { position: absolute; right: 16mm; bottom: 8mm; color: #8190a4; font-size: 8pt; }
+      @media print { html, body { background: #fff; } .page { margin: 0; } }
+    </style>
+  </head>
+  <body>
+    <section class="page cover">
+      <img src="../public/images/logo_elh.svg" alt="ELH" />
+      <h1>Báo cáo cập nhật website ELH</h1>
+      <p class="lead">Tổng hợp chi tiết hạ tầng, CMS, nội dung, bảo mật, hiệu năng và các hạng mục còn lại.</p>
+      <div class="meta">
+        <div><strong>Website:</strong> elh.vn</div>
+        <div><strong>Trang quản trị:</strong> admin.elh.vn</div>
+        <div><strong>Ngày cập nhật:</strong> 14/09/2026</div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Tổng quan</div>
+      <h1>Từ landing page sang hệ thống tự quản lý</h1>
+      <p class="subtitle">ELH hiện kiểm soát source code, hosting, nội dung và quy trình triển khai.</p>
+      <div class="grid-2">
+        <div class="card red"><h3>Trước đây</h3><ul><li>Website tĩnh trên hosting của đơn vị cũ.</li><li>Marketing không thể tự đăng nội dung.</li><li>Sửa website cần can thiệp source/hosting.</li><li>reCAPTCHA và Google Maps bị lỗi.</li><li>Chưa có preview bản nháp trực quan.</li></ul></div>
+        <div class="card green"><h3>Hiện tại</h3><ul><li>Source thuộc GitHub `elh2026`.</li><li>Production chạy trên Cloudflare Workers.</li><li>Marketing quản trị bằng Sanity.</li><li>Có preview và click-to-edit.</li><li>Có backup, rollback và QA tự động.</li></ul></div>
+      </div>
+      <h2>Trạng thái tổng thể</h2>
+      <table>
+        <tr><th>Nhóm</th><th>Kết quả</th><th>Trạng thái</th></tr>
+        <tr><td>Source & quyền kiểm soát</td><td>Repository riêng, lịch sử Git và backup</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>Hosting & DNS website</td><td>Cloudflare Workers và custom domains</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>CMS Marketing</td><td>Sanity Studio tại admin.elh.vn</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>Visual Editing</td><td>Preview riêng, draft mode, nút tạo nhanh</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>Biểu mẫu gửi email</td><td>Giao diện/validation có; backend gửi mail chưa có</td><td><span class="status pending">Tạm hoãn</span></td></tr>
+        <tr><td>Turnstile</td><td>Nhánh thử nghiệm được giữ, chưa đưa production</td><td><span class="status pending">Tạm hoãn</span></td></tr>
+      </table>
+      <div class="callout info"><strong>Kết luận:</strong> Phần vận hành website và quản trị nội dung đã hoàn thành. Hạng mục chức năng còn thiếu chính là gửi biểu mẫu về email.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">02</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Quyền sở hữu</div>
+      <h1>Source code, GitHub và rollback</h1>
+      <h2>Quyền kiểm soát mới</h2>
+      <ul class="check"><li>Source code nằm trong repository do tài khoản GitHub `elh2026` kiểm soát.</li><li>Nhánh production là `main`.</li><li>Không còn phụ thuộc quyền repository của đơn vị làm website cũ.</li><li>Mọi thay đổi có commit để kiểm tra, so sánh và hoàn tác.</li></ul>
+      <h2>Các mốc backup đã tạo</h2>
+      <table>
+        <tr><th>Mốc</th><th>Mục đích</th></tr>
+        <tr><td><code>pre-cms-2026-09-12</code></td><td>Trạng thái trước khi thêm Sanity CMS</td></tr>
+        <tr><td><code>pre-contact-form-2026-09-12</code></td><td>Trước thử nghiệm biểu mẫu/Turnstile</td></tr>
+        <tr><td><code>pre-remove-recaptcha-2026-09-12</code></td><td>Trước khi gỡ reCAPTCHA lỗi</td></tr>
+        <tr><td><code>pre-visual-editing-2026-09-13</code></td><td>Trước hệ thống chỉnh trực quan</td></tr>
+        <tr><td><code>pre-qa-fixes-2026-09-13</code></td><td>Trước đợt QA và tối ưu tổng thể</td></tr>
+      </table>
+      <h2>Quy trình triển khai source</h2>
+      <div class="flow"><div class="flow-box">Chỉnh code</div><div class="arrow">›</div><div class="flow-box">Commit Git</div><div class="arrow">›</div><div class="flow-box">Push `main`</div><div class="arrow">›</div><div class="flow-box">Cloudflare build</div><div class="arrow">›</div><div class="flow-box">elh.vn</div></div>
+      <div class="callout"><strong>Đã sửa lỗi quan trọng:</strong> lệnh deploy thủ công hiện chỉ định rõ cấu hình production, tránh vô tình cập nhật nhầm Worker preview.</div>
+      <h2>Khôi phục khi có sự cố</h2>
+      <ol><li>Chọn Worker version ổn định trước đó hoặc revert commit gây lỗi.</li><li>Tạm dừng webhook build nếu lỗi liên quan nội dung.</li><li>Không xóa Sanity dataset khi rollback source.</li><li>Kiểm tra trên nhánh riêng trước khi đưa lại production.</li></ol>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">03</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Hạ tầng</div>
+      <h1>Cloudflare Hosting và DNS</h1>
+      <div class="grid-3">
+        <div class="metric"><b>3</b><span>Worker/domain phục vụ production, preview và admin</span></div>
+        <div class="metric"><b>Static</b><span>Website chính được xuất HTML tĩnh để ổn định</span></div>
+        <div class="metric"><b>Auto</b><span>Build/deploy từ GitHub khi cập nhật production</span></div>
+      </div>
+      <h2>Các môi trường hiện tại</h2>
+      <table>
+        <tr><th>Địa chỉ</th><th>Worker</th><th>Vai trò</th></tr>
+        <tr><td>elh.vn / www.elh.vn</td><td><code>elh-vn</code></td><td>Website chính thức</td></tr>
+        <tr><td>preview.elh.vn</td><td><code>elh-preview</code></td><td>SSR, draft mode và Visual Editing</td></tr>
+        <tr><td>admin.elh.vn</td><td><code>elh-admin</code></td><td>Sanity Content Studio</td></tr>
+      </table>
+      <h2>DNS đã xác minh</h2>
+      <div class="grid-2">
+        <div class="card blue"><h3>Nameserver</h3><p><code>dell.ns.cloudflare.com</code></p><p><code>jimmy.ns.cloudflare.com</code></p></div>
+        <div class="card orange"><h3>Email vẫn tách biệt</h3><p>MX 5: <code>mail9057.maychuemail.com</code></p><p>MX 10: <code>mx9057.maychuemail.net</code></p></div>
+      </div>
+      <ul class="check"><li>Website không còn phục vụ từ IP hosting cũ `145.79.30.145`.</li><li>Bản ghi MX/email cũ được giữ nguyên khi chuyển website.</li><li>Cache HTML được kiểm soát để tránh hiển thị bản cũ sau deploy.</li><li>Đã sửa các đường dẫn RSC của Next.js bị 404 khi chuyển trang phía client.</li></ul>
+      <div class="callout info"><strong>Ý nghĩa:</strong> chuyển hosting website không đồng nghĩa chuyển hệ thống email. Email ELH vẫn dùng máy chủ email hiện tại.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">04</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">CMS</div>
+      <h1>Sanity Content Studio cho Marketing</h1>
+      <p class="subtitle">Marketing có thể cập nhật nội dung mà không cần sửa source code.</p>
+      <div class="grid-2">
+        <div class="card"><h3>Nội dung dạng danh sách</h3><span class="tag">Bài viết</span><span class="tag">Tin nổi bật</span><span class="tag">Tuyển dụng</span><span class="tag">Sản phẩm</span><span class="tag">Dịch vụ</span><span class="tag">Danh mục</span><span class="tag">Hãng</span><span class="tag">Thẻ</span></div>
+        <div class="card"><h3>Nội dung theo trang</h3><span class="tag">Trang chủ</span><span class="tag">Giới thiệu</span><span class="tag">Dịch vụ</span><span class="tag">Liên hệ</span><span class="tag">Thông tin dùng chung</span></div>
+      </div>
+      <h2>Đăng nhập và phân quyền</h2>
+      <ul class="check"><li>Mỗi thành viên sử dụng tài khoản Sanity cá nhân.</li><li>Có thể dùng GitHub khi tài khoản đã được mời vào Sanity project.</li><li>Sanity role quyết định quyền tạo, sửa, Publish hoặc quản trị.</li><li>Không sử dụng mật khẩu quản trị chung.</li></ul>
+      <div class="callout warn"><strong>Cloudflare Access chưa bật:</strong> Zero Trust onboarding của tài khoản yêu cầu thông tin thanh toán. Lớp bảo vệ hiện tại là Sanity authentication và project membership.</div>
+      <h2>Trạng thái nội dung</h2>
+      <table>
+        <tr><th>Trạng thái</th><th>Ý nghĩa</th><th>Có trên website chính?</th></tr>
+        <tr><td>Draft</td><td>Nội dung đang soạn/chưa Publish</td><td>Không</td></tr>
+        <tr><td>Published</td><td>Phiên bản đang được dùng công khai</td><td>Có</td></tr>
+        <tr><td>Unpublished</td><td>Đã gỡ bản công khai</td><td>Không, sau build lại</td></tr>
+      </table>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">05</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Nội dung</div>
+      <h1>Dữ liệu cũ và mô hình nội dung mới</h1>
+      <h2>Dữ liệu đã đưa vào Sanity</h2>
+      <ul class="check"><li>Sản phẩm và trang chi tiết sản phẩm.</li><li>Bài viết/tin tức cùng ảnh đại diện.</li><li>Hãng sản xuất, danh mục và thẻ.</li><li>Nội dung các trang chính.</li><li>Thông tin liên hệ và cấu hình dùng chung.</li></ul>
+      <div class="grid-3">
+        <div class="metric"><b>52</b><span>Trang sản phẩm tại lần build QA gần nhất</span></div>
+        <div class="metric"><b>18</b><span>Trang bài viết tại lần build QA gần nhất</span></div>
+        <div class="metric"><b>84</b><span>Tổng route tĩnh được build thành công</span></div>
+      </div>
+      <h2>Trường bài viết</h2>
+      <p>Tiêu đề, slug, tóm tắt, ảnh đại diện, Alt text, nội dung, danh mục, thẻ, tác giả, ngày xuất bản, loại bài, Nổi bật và SEO.</p>
+      <h2>Trường sản phẩm</h2>
+      <p>Tên, slug, model, SKU, mô tả, thông số, ảnh, album, Catalogue PDF, hãng, danh mục, thẻ, sản phẩm liên quan, Nổi bật, Ngừng hiển thị và SEO.</p>
+      <h2>Trường dịch vụ</h2>
+      <p>Tên, slug, mô tả, nội dung, ảnh, Alt text, nhãn liên hệ, hiển thị Trang chủ, Ngừng hiển thị, thứ tự trang và SEO.</p>
+      <div class="callout info"><strong>Phân loại bài:</strong> Một bài Tin tức có thể đồng thời xuất hiện trong Tin nổi bật bằng checkbox “Bài viết nổi bật”, không cần tạo hai document.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">06</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Visual Editing</div>
+      <h1>Xem và chỉnh trực tiếp trên website</h1>
+      <h2>Trải nghiệm mới cho Marketing</h2>
+      <ul class="check"><li>Mở website thật ngay trong Sanity Studio.</li><li>Click vào chữ hoặc hình được đánh dấu để mở đúng trường.</li><li>Xem thay đổi draft gần như tức thì.</li><li>Draft không xuất hiện trên `elh.vn`.</li><li>Preview có `noindex`, không cho Google lập chỉ mục.</li><li>Token đọc draft nằm trong Worker secret, không vào bundle công khai.</li></ul>
+      <h2>Nút tạo nội dung nhanh</h2>
+      <div class="grid-3">
+        <div class="card orange"><h3>+ Bài viết</h3><p>Tin tức, không Nổi bật</p></div>
+        <div class="card orange"><h3>+ Tin nổi bật</h3><p>Tin tức, tự bật Nổi bật</p></div>
+        <div class="card orange"><h3>+ Tuyển dụng</h3><p>Tự chọn loại Tuyển dụng</p></div>
+        <div class="card blue"><h3>+ Sản phẩm</h3><p>Mẫu sản phẩm mới</p></div>
+        <div class="card blue"><h3>+ Dịch vụ</h3><p>Mẫu dịch vụ mới</p></div>
+        <div class="card"><h3>Thoát xem nháp</h3><p>Kết thúc phiên draft mode</p></div>
+      </div>
+      <h2>Lỗi đã xử lý</h2>
+      <p>Cloudflare từng mã hóa tham số Sanity thành `%3D/%3B`, khiến các trang tạo bài trống hoặc báo thiếu `type`. Worker `elh-admin` hiện xử lý intent route trước Static Assets và tự sửa cả URL lỗi cũ.</p>
+      <div class="callout"><strong>Kết quả kiểm tra:</strong> 5/5 URL tạo Bài viết, Tin nổi bật, Tuyển dụng, Sản phẩm và Dịch vụ trả `200` trực tiếp.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">07</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Quản trị trang</div>
+      <h1>Banner, giới thiệu, dịch vụ và liên hệ</h1>
+      <table>
+        <tr><th>Trang</th><th>Nội dung có thể quản lý</th></tr>
+        <tr><td>Trang chủ</td><td>Banner/thứ tự, giới thiệu, sản phẩm/dịch vụ/bài viết nổi bật, CTA liên hệ</td></tr>
+        <tr><td>Giới thiệu</td><td>Banner, nội dung công ty, thư viện ảnh, năng lực chính và SEO</td></tr>
+        <tr><td>Dịch vụ</td><td>Banner, mô tả, danh sách dịch vụ và thứ tự hiển thị</td></tr>
+        <tr><td>Liên hệ</td><td>Banner, chữ quanh form, Google Maps và danh sách hãng</td></tr>
+        <tr><td>Thông tin dùng chung</td><td>Tên công ty, email, điện thoại, địa chỉ, mạng xã hội, Footer và SEO mặc định</td></tr>
+      </table>
+      <h2>Tự động build khi Publish</h2>
+      <div class="flow"><div class="flow-box">Marketing Publish</div><div class="arrow">›</div><div class="flow-box">Sanity Webhook</div><div class="arrow">›</div><div class="flow-box">Cloudflare Build</div><div class="arrow">›</div><div class="flow-box">Website cập nhật</div></div>
+      <p>Webhook đã bao phủ bài viết, sản phẩm, Trang chủ, Giới thiệu, Dịch vụ, Liên hệ, cấu hình chung, hãng, danh mục và thẻ. Draft không kích hoạt build production.</p>
+      <div class="callout info"><strong>Lợi ích:</strong> Marketing có thể tự Publish. Website chính vẫn là static site nên khách không phải tải CMS ở mỗi lần truy cập.</div>
+      <h2>Thông tin dùng chung</h2>
+      <p>Sửa một nơi có thể cập nhật Header, Footer và Trang Liên hệ: tên công ty, email, điện thoại, địa chỉ, Maps, Facebook, LinkedIn, YouTube, Top Tags, chính sách và bản quyền.</p>
+      <div class="callout warn"><strong>Lưu ý:</strong> Đây là nhóm dữ liệu ảnh hưởng nhiều trang; luôn xem preview trước khi Publish.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">08</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Sửa lỗi chức năng</div>
+      <h1>Maps, CAPTCHA và biểu mẫu</h1>
+      <h2>Google Maps — đã hoàn thành</h2>
+      <ul class="check"><li>Sửa lỗi `Invalid 'pb' parameter`.</li><li>Dùng Google Maps Embed URL hợp lệ.</li><li>Thêm validation URL Maps trong Sanity.</li><li>Ngăn lưu URL tìm kiếm hoặc embed thiếu dữ liệu.</li><li>Thêm title cho iframe và lazy loading.</li></ul>
+      <h2>reCAPTCHA cũ — đã loại bỏ</h2>
+      <ul class="check"><li>Gỡ widget báo “Tên miền không hợp lệ cho khóa trang web”.</li><li>Gỡ dependency/script reCAPTCHA không còn sử dụng.</li><li>QA production kiểm tra widget cũ không xuất hiện trở lại.</li></ul>
+      <h2>Biểu mẫu liên hệ — hoàn thành một phần</h2>
+      <table>
+        <tr><th>Hạng mục</th><th>Trạng thái</th></tr>
+        <tr><td>Giao diện form Trang chủ và Trang Liên hệ</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>Validation họ tên, điện thoại, email, địa chỉ</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>Label/ID và nút Submit đúng form</td><td><span class="status done">Hoàn thành</span></td></tr>
+        <tr><td>Gửi dữ liệu đến `sales-06@elh.vn`</td><td><span class="status pending">Chưa triển khai</span></td></tr>
+        <tr><td>Cloudflare Turnstile production</td><td><span class="status pending">Chưa triển khai</span></td></tr>
+      </table>
+      <div class="callout warn"><strong>Hiện trạng:</strong> bấm Gửi mới chạy validation và ghi dữ liệu vào developer console. Cloudflare Email Sending miễn phí không khả dụng trên tài khoản hiện tại.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">09</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Trải nghiệm & SEO</div>
+      <h1>Tìm kiếm, SEO và Accessibility</h1>
+      <h2>Tìm kiếm sản phẩm</h2>
+      <ul class="check"><li>Ô tìm kiếm trong Header.</li><li>URL tìm kiếm dạng `/products/?search=...`.</li><li>Lọc sản phẩm theo từ khóa trên trang sản phẩm.</li><li>Giữ tương thích với static export.</li></ul>
+      <h2>SEO kỹ thuật</h2>
+      <div class="grid-2">
+        <div class="card"><ul class="check"><li>Sitemap XML</li><li>Robots.txt</li><li>URL bài viết/sản phẩm</li><li>Route Tuyển dụng</li><li>Sửa ký tự `&` trong sitemap</li></ul></div>
+        <div class="card"><ul class="check"><li>SEO title ≤ 60 ký tự</li><li>Mô tả ≤ 160 ký tự</li><li>Canonical URL</li><li>Open Graph image</li><li>No index và Alt text</li></ul></div>
+      </div>
+      <h2>Accessibility</h2>
+      <ul class="check"><li>Label và ID cho input.</li><li>Tên truy cập cho nút carousel.</li><li>Title cho Google Maps iframe.</li><li>Thẻ `main` cho Trang chủ.</li><li>Cải thiện tương phản màu chữ và nút.</li><li>Đổi phần tử click sang button phù hợp.</li><li>Loại bỏ Link chứa button không hợp lệ.</li></ul>
+      <div class="grid-3">
+        <div class="metric"><b>100</b><span>Accessibility</span></div>
+        <div class="metric"><b>100</b><span>Best Practices</span></div>
+        <div class="metric"><b>100</b><span>SEO</span></div>
+      </div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">10</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Hiệu năng & chất lượng</div>
+      <h1>Tối ưu tốc độ, bảo mật và QA</h1>
+      <h2>Tối ưu đã thực hiện</h2>
+      <ul class="check"><li>Giữ production dạng static.</li><li>Chuyển banner, 25 logo và 5 ảnh công nghệ sang WebP.</li><li>Giảm khoảng 1,27 MB ảnh tĩnh.</li><li>Sanity CDN tự chọn format/chất lượng phù hợp.</li><li>Preconnect tới Sanity CDN và ưu tiên banner đầu.</li><li>Loại bỏ Suspense gây layout shift toàn trang.</li><li>Điều chỉnh slider để hạn chế ảnh hưởng LCP.</li></ul>
+      <div class="grid-3">
+        <div class="metric"><b>74</b><span>Performance Lighthouse</span></div>
+        <div class="metric"><b>60 ms</b><span>Total Blocking Time</span></div>
+        <div class="metric"><b>0</b><span>Cumulative Layout Shift</span></div>
+      </div>
+      <h2>QA production</h2>
+      <div class="grid-2"><div class="card green"><h3>74 trang sitemap</h3><p>Được tải và kiểm tra trạng thái.</p></div><div class="card green"><h3>200 URL nội bộ</h3><p>Link, asset, RSC route, Maps và CAPTCHA.</p></div></div>
+      <h2>Package và code</h2>
+      <ul class="check"><li>Nâng Swiper, loại bỏ lỗ hổng Critical.</li><li>Nâng UUID.</li><li>Sửa ESLint cho Next.js 16.</li><li>Sửa render thừa trong React.</li><li>Typecheck production, Studio và preview.</li></ul>
+      <div class="callout warn"><strong>Còn theo dõi:</strong> 7 High và 7 Moderate là dependency gián tiếp của Sanity CLI/build tool. Chưa ép major upgrade để tránh làm hỏng Studio. Critical hiện bằng 0.</div>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">11</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Bàn giao</div>
+      <h1>Kết quả và bước tiếp theo</h1>
+      <h2>Đã bàn giao</h2>
+      <ul class="check"><li>Website chính trên Cloudflare Workers.</li><li>Repository GitHub do ELH kiểm soát.</li><li>CMS tại admin.elh.vn.</li><li>Preview/Visual Editing tại preview.elh.vn.</li><li>Dữ liệu cũ đã được đưa vào Sanity.</li><li>Webhook Publish → build production.</li><li>Backup/tag/rollback.</li><li>QA crawler và kiểm tra Lighthouse.</li><li>Hướng dẫn Marketing dạng PDF và Markdown.</li></ul>
+      <h2>Ba hạng mục còn lại</h2>
+      <ol class="pending-list"><li><b>Biểu mẫu gửi email:</b> chọn dịch vụ gửi mail phù hợp và gửi về `sales-06@elh.vn`.</li><li><b>Turnstile:</b> hoàn thiện server-side verification sau khi có backend form.</li><li><b>Performance:</b> tiếp tục giảm LCP của banner và JavaScript slider nếu cần điểm cao hơn.</li></ol>
+      <h2>Ưu tiên đề xuất</h2>
+      <table>
+        <tr><th>Ưu tiên</th><th>Công việc</th><th>Lý do</th></tr>
+        <tr><td>1</td><td>Hoàn thiện backend biểu mẫu</td><td>Đảm bảo khách hàng gửi yêu cầu thành công</td></tr>
+        <tr><td>2</td><td>Thêm Turnstile</td><td>Chống spam cho form sau khi backend hoạt động</td></tr>
+        <tr><td>3</td><td>Đào tạo Marketing theo tài liệu</td><td>Chuẩn hóa Publish, ảnh, SEO và slug</td></tr>
+        <tr><td>4</td><td>Theo dõi Core Web Vitals thực tế</td><td>Ưu tiên tối ưu dựa trên người dùng thật</td></tr>
+      </table>
+      <div class="callout info"><strong>Tóm lại:</strong> ELH đã chuyển từ website tĩnh phụ thuộc bên cũ sang nền tảng tự quản lý, có CMS, preview, deploy tự động, rollback và QA. Phần còn thiếu có tác động trực tiếp nhất là backend gửi biểu mẫu.</div>
+      <p class="small">Tài liệu tham chiếu nội bộ: HUONG-DAN-MARKETING-ELH.pdf · GitHub branch `main` · Báo cáo lập ngày 14/09/2026.</p>
+      <span class="brandline">ELH Website Update Report</span><span class="page-no">12</span>
+    </section>
+  </body>
+</html>
