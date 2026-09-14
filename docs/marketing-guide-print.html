@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hướng dẫn quản trị nội dung website ELH</title>
+    <style>
+      @page { size: A4; margin: 0; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: #e9edf3; color: #182b4b; font-family: Arial, "Segoe UI", sans-serif; }
+      .page { width: 210mm; height: 297mm; padding: 14mm 16mm 13mm; margin: 0 auto 8mm; background: #fff; position: relative; overflow: hidden; break-after: page; page-break-after: always; }
+      .page:last-child { break-after: auto; page-break-after: auto; }
+      .cover { background: linear-gradient(145deg, #0d1b34 0%, #173760 64%, #f36d21 64.2%, #f68938 100%); color: #fff; padding: 22mm 18mm; }
+      .cover img { width: 48mm; height: auto; background: #fff; border-radius: 4mm; padding: 4mm; }
+      .cover h1 { color: #fff; font-size: 29pt; line-height: 1.08; margin: 35mm 0 6mm; max-width: 155mm; }
+      .cover .lead { font-size: 14pt; line-height: 1.5; max-width: 135mm; color: #dce8f8; }
+      .cover .meta { position: absolute; left: 18mm; bottom: 22mm; font-size: 10pt; line-height: 1.8; }
+      h1 { font-size: 22pt; line-height: 1.15; margin: 0 0 7mm; color: #142d53; }
+      h2 { font-size: 14pt; margin: 6mm 0 3mm; color: #142d53; }
+      h3 { font-size: 11pt; margin: 4mm 0 2mm; color: #b54e00; }
+      p, li, td, th { font-size: 9.4pt; line-height: 1.45; }
+      p { margin: 0 0 3mm; }
+      ul, ol { margin: 2mm 0 4mm 5mm; padding-left: 4mm; }
+      li { margin-bottom: 1.4mm; }
+      a { color: #0b6aa7; text-decoration: none; }
+      .eyebrow { color: #f36d21; text-transform: uppercase; letter-spacing: 1.5px; font-size: 8.5pt; font-weight: 700; margin-bottom: 2mm; }
+      .subtitle { color: #53657f; font-size: 10.5pt; margin-top: -4mm; margin-bottom: 7mm; }
+      .rule { height: 1px; background: #cdd6e3; margin: 4mm 0; }
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+      .card { border: 1px solid #dce3ec; border-radius: 4mm; padding: 4mm; background: #fbfcfe; }
+      .card.orange { border-color: #ffcfac; background: #fff8f2; }
+      .card.blue { border-color: #b8d4ef; background: #f2f8fd; }
+      .card h3 { margin-top: 0; }
+      .callout { border-left: 4px solid #f36d21; background: #fff6ef; border-radius: 0 3mm 3mm 0; padding: 3.5mm 4mm; margin: 4mm 0; }
+      .callout.blue { border-left-color: #1a6da6; background: #f1f7fc; }
+      .callout.red { border-left-color: #c53232; background: #fff3f3; }
+      .steps { counter-reset: step; display: grid; gap: 3mm; }
+      .step { counter-increment: step; display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; align-items: start; }
+      .step::before { content: counter(step); width: 8mm; height: 8mm; border-radius: 50%; background: #f36d21; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 9pt; }
+      .ui { background: #10131d; color: #fff; border-radius: 4mm; padding: 4mm; box-shadow: 0 2mm 7mm rgba(12, 30, 58, .16); }
+      .ui-nav { display: flex; gap: 2mm; align-items: center; border-bottom: 1px solid #343948; padding-bottom: 3mm; margin-bottom: 3mm; }
+      .ui-tab { padding: 2mm 3mm; border-radius: 2mm; background: #222838; font-size: 8pt; }
+      .ui-tab.active { background: #617fee; }
+      .ui-layout { display: grid; grid-template-columns: 36mm 1fr; min-height: 48mm; }
+      .ui-menu { border-right: 1px solid #343948; padding-right: 3mm; }
+      .ui-menu div { padding: 2mm; font-size: 8pt; border-radius: 1.5mm; margin-bottom: 1mm; }
+      .ui-menu .active { background: #6e8df4; }
+      .ui-content { padding-left: 4mm; color: #dce3f3; }
+      .toolbar { display: flex; flex-wrap: wrap; gap: 2mm; background: #0f172a; padding: 3mm; border-radius: 3mm; }
+      .pill { background: #f36d21; color: #fff; border-radius: 99px; padding: 2mm 3mm; font-size: 8pt; font-weight: 700; }
+      table { width: 100%; border-collapse: collapse; margin: 3mm 0; }
+      th { background: #173760; color: #fff; text-align: left; padding: 2.5mm; }
+      td { border-bottom: 1px solid #dce3ec; padding: 2.5mm; vertical-align: top; }
+      .check { list-style: none; padding-left: 0; margin-left: 0; }
+      .check li::before { content: "□"; color: #f36d21; font-size: 12pt; font-weight: 700; margin-right: 2mm; }
+      .do, .dont { padding: 3mm; border-radius: 3mm; }
+      .do { background: #effaf4; border: 1px solid #b8e3c9; }
+      .dont { background: #fff3f3; border: 1px solid #f0c1c1; }
+      .tag { display: inline-block; background: #e7eef8; color: #173760; padding: 1mm 2mm; border-radius: 1.5mm; font-size: 8pt; margin: 0 .8mm .8mm 0; }
+      .page-no { position: absolute; right: 16mm; bottom: 8mm; color: #7d8ca2; font-size: 8pt; }
+      .brandline { position: absolute; left: 16mm; bottom: 8mm; color: #f36d21; font-weight: 700; font-size: 8pt; }
+      .small { font-size: 8.2pt; color: #65758b; }
+      code { background: #eef2f7; padding: .5mm 1.2mm; border-radius: 1mm; font-size: 8.5pt; }
+      @media print { html, body { background: #fff; } .page { margin: 0; box-shadow: none; } }
+    </style>
+  </head>
+  <body>
+    <section class="page cover">
+      <img src="../public/images/logo_elh.svg" alt="ELH" />
+      <h1>Hướng dẫn quản trị nội dung website ELH</h1>
+      <p class="lead">Tài liệu thao tác nhanh dành cho Marketing: tạo nội dung, xem bản nháp, SEO và xuất bản an toàn.</p>
+      <div class="meta">
+        <div><strong>Trang quản trị:</strong> admin.elh.vn</div>
+        <div><strong>Website:</strong> elh.vn</div>
+        <div><strong>Phiên bản:</strong> 1.0 · 14/09/2026</div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Bắt đầu</div>
+      <h1>Quy trình 6 bước</h1>
+      <p class="subtitle">Đi theo đúng thứ tự này cho mọi bài viết, sản phẩm và dịch vụ.</p>
+      <div class="steps">
+        <div class="step"><div><strong>Đăng nhập</strong><br />Mở <a href="https://admin.elh.vn">admin.elh.vn</a> bằng tài khoản cá nhân đã được mời vào Sanity.</div></div>
+        <div class="step"><div><strong>Chọn cách làm việc</strong><br /><b>Quản lý nội dung</b> để tìm/tạo; <b>Xem & chỉnh trên website</b> để nhìn đúng vị trí.</div></div>
+        <div class="step"><div><strong>Nhập nội dung</strong><br />Điền chữ, hình, Alt text, slug, danh mục và SEO.</div></div>
+        <div class="step"><div><strong>Xem bản nháp</strong><br />Kiểm tra desktop, mobile, hình ảnh và liên kết trong cửa sổ preview.</div></div>
+        <div class="step"><div><strong>Publish</strong><br />Chỉ bấm Xuất bản khi không còn lỗi trường bắt buộc.</div></div>
+        <div class="step"><div><strong>Kiểm tra website chính</strong><br />Chờ build hoàn tất, sau đó mở elh.vn và kiểm tra lại.</div></div>
+      </div>
+      <div class="callout blue"><strong>Nhớ:</strong> Sanity tự lưu bản nháp, nhưng Save không có nghĩa là nội dung đã xuất hiện trên website chính.</div>
+      <h2>Ba trạng thái cần phân biệt</h2>
+      <table>
+        <tr><th>Trạng thái</th><th>Ý nghĩa</th><th>Khách thấy?</th></tr>
+        <tr><td>Draft / Bản nháp</td><td>Đang soạn hoặc chưa Publish thay đổi mới</td><td>Không</td></tr>
+        <tr><td>Published</td><td>Phiên bản công khai</td><td>Có</td></tr>
+        <tr><td>Unpublished</td><td>Đã gỡ bản công khai</td><td>Không, sau khi build lại</td></tr>
+      </table>
+      <div class="callout red"><strong>Bảo mật:</strong> Không dùng chung tài khoản; không gửi mật khẩu, mã đăng nhập hoặc token qua nhóm chat.</div>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">02</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Giao diện</div>
+      <h1>Hai khu vực làm việc</h1>
+      <div class="ui">
+        <div class="ui-nav"><span class="ui-tab active">Quản lý nội dung</span><span class="ui-tab">Xem & chỉnh trên website</span><span class="ui-tab">Releases</span></div>
+        <div class="ui-layout">
+          <div class="ui-menu"><div class="active">Sản phẩm</div><div>Bài viết</div><div>Danh mục</div><div>Hãng sản xuất</div><div>Thẻ (tag)</div><div>Cấu hình website</div></div>
+          <div class="ui-content"><strong>Danh sách nội dung</strong><p class="small">Chọn một mục để mở editor hoặc bấm dấu + để tạo mới.</p></div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 6mm">
+        <div class="card blue"><h3>Quản lý nội dung</h3><ul><li>Tạo và tìm nội dung.</li><li>Lọc Bản nháp, Đã xuất bản.</li><li>Quản lý danh mục, hãng, thẻ.</li><li>Chỉnh các trang và cấu hình chung.</li></ul></div>
+        <div class="card orange"><h3>Xem & chỉnh trên website</h3><ul><li>Duyệt website thật trong preview.</li><li>Bấm chữ/hình được đánh dấu.</li><li>Xem thay đổi draft tức thì.</li><li>Dùng các nút tạo nhanh.</li></ul></div>
+      </div>
+      <h2>Thanh tạo nhanh trong Preview</h2>
+      <div class="toolbar"><span class="pill">+ Bài viết</span><span class="pill">+ Tin nổi bật</span><span class="pill">+ Tuyển dụng</span><span class="pill">+ Sản phẩm</span><span class="pill">+ Dịch vụ</span></div>
+      <p class="small" style="margin-top: 3mm">Các trang Tin tức, Tin nổi bật và Tuyển dụng còn có nút + ngay cạnh tiêu đề trang.</p>
+      <div class="callout"><strong>Nếu nút tạo mở trang lỗi:</strong> nhấn Ctrl + F5, đóng tab lỗi và bấm lại. Khi báo kỹ thuật, chụp toàn màn hình có thanh địa chỉ.</div>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">03</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Phân loại</div>
+      <h1>Chọn đúng nút tạo nội dung</h1>
+      <table>
+        <tr><th>Nút</th><th>Được chọn sẵn</th><th>Nơi hiển thị</th></tr>
+        <tr><td><b>+ Bài viết</b></td><td>Tin tức; không nổi bật</td><td>Tin tức & Sự kiện</td></tr>
+        <tr><td><b>+ Tin nổi bật</b></td><td>Tin tức; bật Nổi bật</td><td>Tin tức & Sự kiện + Tin nổi bật</td></tr>
+        <tr><td><b>+ Tuyển dụng</b></td><td>Loại Tuyển dụng</td><td>Trang Tuyển dụng</td></tr>
+        <tr><td><b>+ Sản phẩm</b></td><td>Mẫu sản phẩm mới</td><td>Danh sách sản phẩm sau Publish</td></tr>
+        <tr><td><b>+ Dịch vụ</b></td><td>Mẫu dịch vụ mới</td><td>Cần thêm vào thứ tự Trang dịch vụ</td></tr>
+      </table>
+      <div class="callout blue"><strong>Tin nổi bật không phải bài thứ hai.</strong> Một bài Tin tức có thể đồng thời xuất hiện ở Tin nổi bật bằng checkbox <b>Bài viết nổi bật</b>.</div>
+      <div class="grid-3">
+        <div class="card"><h3>Tin tức</h3><p>Loại: Tin tức & sự kiện</p><span class="tag">featured: tắt</span></div>
+        <div class="card orange"><h3>Tin nổi bật</h3><p>Loại: Tin tức & sự kiện</p><span class="tag">featured: bật</span></div>
+        <div class="card blue"><h3>Tuyển dụng</h3><p>Loại: Tin tuyển dụng</p><span class="tag">featured: thường tắt</span></div>
+      </div>
+      <h2>Khi nào dùng “Ngừng hiển thị”?</h2>
+      <p>Với sản phẩm hoặc dịch vụ đã cũ, ưu tiên bật <b>Ngừng hiển thị</b> thay vì xóa document. Cách này giữ lại dữ liệu để khôi phục hoặc đối chiếu sau này.</p>
+      <div class="grid-2">
+        <div class="do"><strong>Nên làm</strong><ul><li>Tạo đúng mẫu từ nút nhanh.</li><li>Kiểm tra loại bài trước Publish.</li><li>Dùng Ngừng hiển thị cho nội dung cũ.</li></ul></div>
+        <div class="dont"><strong>Không nên</strong><ul><li>Tạo hai bản sao cho một tin nổi bật.</li><li>Xóa hàng loạt nội dung cũ.</li><li>Đổi loại bài sau khi chưa kiểm tra URL.</li></ul></div>
+      </div>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">04</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Bài viết</div>
+      <h1>Tạo bài viết chuẩn</h1>
+      <div class="grid-2">
+        <div>
+          <h2>Nội dung bắt buộc</h2>
+          <ol><li><b>Tiêu đề:</b> tối đa 140 ký tự.</li><li><b>Slug:</b> bấm Generate sau khi nhập tiêu đề.</li><li><b>Tóm tắt:</b> tối đa 320 ký tự.</li><li><b>Ảnh đại diện:</b> ảnh + Alt text.</li><li><b>Nội dung bài viết:</b> dùng heading, đoạn, danh sách và ảnh.</li></ol>
+          <h2>Phân loại</h2>
+          <ul><li>Danh mục và Thẻ.</li><li>Tác giả, ngày xuất bản.</li><li>Loại bài viết.</li><li>Checkbox Bài viết nổi bật.</li></ul>
+        </div>
+        <div class="card blue">
+          <h3>Mẫu kiểm tra nhanh</h3>
+          <ul class="check"><li>Tiêu đề rõ chủ đề</li><li>Slug đã Generate</li><li>Tóm tắt không quá 320 ký tự</li><li>Ảnh đúng tỷ lệ</li><li>Alt text có ý nghĩa</li><li>Danh mục và thẻ phù hợp</li><li>Đúng loại bài</li><li>SEO đã điền</li></ul>
+        </div>
+      </div>
+      <h2>Slug là URL của bài</h2>
+      <div class="callout"><code>https://elh.vn/news/ten-bai-viet/</code><br /><br />Có thể sửa slug trước lần Publish đầu tiên. Không đổi slug của bài đã chạy quảng cáo, được chia sẻ hoặc đã có trên Google nếu chưa trao đổi với kỹ thuật.</div>
+      <h2>Viết nội dung dễ đọc</h2>
+      <div class="grid-2">
+        <div class="do"><strong>Nên</strong><ul><li>Mỗi đoạn 2–4 câu.</li><li>Dùng heading mô tả đúng phần.</li><li>Thông số quan trọng dùng danh sách/bảng.</li><li>Liên kết đến sản phẩm liên quan.</li></ul></div>
+        <div class="dont"><strong>Tránh</strong><ul><li>Viết toàn bộ bằng chữ in hoa.</li><li>Nhồi từ khóa hoặc hashtag.</li><li>Sao chép nội dung hãng mà không kiểm tra.</li><li>Dùng ảnh không có quyền.</li></ul></div>
+      </div>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">05</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Sản phẩm</div>
+      <h1>Đăng sản phẩm đầy đủ</h1>
+      <div class="grid-2">
+        <div class="card"><h3>Thông tin chính</h3><ul><li>Tên sản phẩm và slug.</li><li>Model, SKU.</li><li>Mô tả ngắn ≤ 320 ký tự.</li><li>Nội dung chi tiết.</li><li>Thông số kỹ thuật.</li></ul></div>
+        <div class="card"><h3>Media & tài liệu</h3><ul><li>Ảnh đại diện + Alt text.</li><li>Album ảnh.</li><li>Catalogue/Datasheet dạng PDF.</li><li>Tên tài liệu dễ hiểu.</li></ul></div>
+        <div class="card"><h3>Phân loại</h3><ul><li>Hãng sản xuất.</li><li>Ít nhất một danh mục.</li><li>Thẻ liên quan.</li><li>Sản phẩm liên quan.</li></ul></div>
+        <div class="card orange"><h3>Hiển thị</h3><ul><li>Sản phẩm nổi bật.</li><li>Ngừng hiển thị.</li><li>Ngày xuất bản.</li><li>SEO.</li></ul></div>
+      </div>
+      <div class="callout blue"><strong>Quan trọng:</strong> Bật “Sản phẩm nổi bật” không thay thế danh sách chọn tay của Trang chủ. Nếu cần xuất hiện đúng khu vực Trang chủ, mở Trang chủ và thêm sản phẩm vào danh sách <b>Sản phẩm nổi bật</b>.</div>
+      <h2>Quy chuẩn thông số</h2>
+      <ul><li>Giữ nguyên đơn vị theo tài liệu kỹ thuật: bar, °C, mm, kW…</li><li>Không tự dịch model, mã thiết bị hoặc tên tiêu chuẩn.</li><li>Đối chiếu ít nhất một nguồn chính thức của hãng trước khi Publish.</li><li>PDF phải mở được và đúng phiên bản sản phẩm.</li></ul>
+      <h2>Checklist</h2>
+      <ul class="check"><li>Tên/model/SKU chính xác</li><li>Slug đã Generate</li><li>Ảnh đại diện rõ nét</li><li>Alt text mô tả sản phẩm</li><li>Danh mục và hãng đúng</li><li>Thông số có đơn vị</li><li>PDF mở được</li><li>Đã xem bản nháp</li></ul>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">06</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Dịch vụ & trang</div>
+      <h1>Dịch vụ và chỉnh trực quan</h1>
+      <div class="grid-2">
+        <div>
+          <h2>Tạo dịch vụ</h2>
+          <ol><li>Bấm <b>+ Dịch vụ</b>.</li><li>Nhập tên, slug, mô tả và nội dung.</li><li>Thêm ảnh + Alt text.</li><li>Kiểm tra nhãn nút liên hệ.</li><li>Bật hiển thị Trang chủ nếu cần.</li><li>Điền SEO và Publish.</li></ol>
+        </div>
+        <div class="card orange">
+          <h3>Để dịch vụ xuất hiện đúng thứ tự</h3>
+          <ol><li>Mở Chỉnh nội dung các trang.</li><li>Chọn Trang dịch vụ.</li><li>Thêm dịch vụ vào “Dịch vụ và thứ tự hiển thị”.</li><li>Kéo thả đến vị trí mong muốn.</li><li>Publish Trang dịch vụ.</li></ol>
+        </div>
+      </div>
+      <h2>Các trang được phép chỉnh</h2>
+      <table>
+        <tr><th>Trang</th><th>Nội dung Marketing có thể chỉnh</th></tr>
+        <tr><td>Trang chủ</td><td>Banner, giới thiệu, tiêu đề và danh sách nổi bật</td></tr>
+        <tr><td>Giới thiệu</td><td>Banner, nội dung công ty, thư viện ảnh, năng lực</td></tr>
+        <tr><td>Dịch vụ</td><td>Banner, mô tả, danh sách và thứ tự dịch vụ</td></tr>
+        <tr><td>Liên hệ</td><td>Banner, chữ quanh biểu mẫu, Maps, hãng hiển thị</td></tr>
+        <tr><td>Thông tin dùng chung</td><td>Email, điện thoại, địa chỉ, mạng xã hội, Footer, SEO mặc định</td></tr>
+      </table>
+      <div class="callout red"><strong>Cẩn thận:</strong> Thông tin dùng chung có thể ảnh hưởng Header, Footer và nhiều trang cùng lúc. Luôn xem trước trước khi Publish.</div>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">07</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Hình ảnh</div>
+      <h1>Ảnh đẹp, nhẹ và đúng SEO</h1>
+      <table>
+        <tr><th>Loại ảnh</th><th>Tỷ lệ/kích thước khuyến nghị</th><th>Định dạng</th></tr>
+        <tr><td>Banner</td><td>16:9 · khoảng 1920 × 1080 px</td><td>JPG hoặc WebP</td></tr>
+        <tr><td>Ảnh bài viết</td><td>16:9 · khoảng 1600 × 900 px</td><td>JPG hoặc WebP</td></tr>
+        <tr><td>Ảnh sản phẩm</td><td>1:1 · khoảng 1200 × 1200 px</td><td>JPG/WebP; PNG nếu cần nền trong</td></tr>
+        <tr><td>Logo</td><td>Đủ nét, có khoảng thở</td><td>SVG hoặc PNG nền trong</td></tr>
+      </table>
+      <div class="callout"><strong>Dung lượng:</strong> cố gắng giữ mỗi ảnh dưới 500 KB. Không tải trực tiếp ảnh vài MB từ điện thoại hoặc máy ảnh.</div>
+      <div class="grid-2">
+        <div class="do"><strong>Ảnh đạt yêu cầu</strong><ul><li>Rõ nét, không méo.</li><li>Đúng tỷ lệ khu vực.</li><li>Không có watermark trái phép.</li><li>Tên file dễ hiểu.</li><li>Đã chỉnh Hotspot/Crop.</li></ul></div>
+        <div class="dont"><strong>Ảnh cần tránh</strong><ul><li>Ảnh chụp màn hình mờ.</li><li>Logo bị kéo dãn.</li><li>Nhiều chữ nhỏ trong ảnh.</li><li>Ảnh không rõ bản quyền.</li><li>Tên IMG_1234-final-final.jpg.</li></ul></div>
+      </div>
+      <h2>Viết Alt text</h2>
+      <p>Alt text mô tả ngắn nội dung quan trọng của ảnh cho Google và người dùng trình đọc màn hình.</p>
+      <div class="card blue"><p><b>Tốt:</b> “Cảm biến nhiệt độ Tempco model X tại nhà máy”.</p><p><b>Không tốt:</b> “ảnh”, “image1”, hoặc một chuỗi từ khóa lặp lại.</p></div>
+      <p class="small" style="margin-top: 4mm">Không cần bắt đầu Alt text bằng “Hình ảnh của…”. Mô tả trực tiếp vật thể hoặc ngữ cảnh chính.</p>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">08</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">SEO</div>
+      <h1>Checklist SEO trước khi Publish</h1>
+      <div class="grid-2">
+        <div>
+          <ul class="check"><li>Một tiêu đề rõ ràng cho mỗi trang/bài</li><li>Tiêu đề SEO ≤ 60 ký tự</li><li>Mô tả SEO ≤ 160 ký tự</li><li>Từ khóa xuất hiện tự nhiên</li><li>Heading theo thứ tự hợp lý</li><li>Mọi ảnh có Alt text</li></ul>
+        </div>
+        <div>
+          <ul class="check"><li>Slug ngắn, không dấu, có gạch ngang</li><li>Danh mục/thẻ đúng chủ đề</li><li>No index đang tắt</li><li>Canonical để trống nếu không chắc</li><li>Ảnh chia sẻ rõ khi lên mạng xã hội</li><li>Không nhồi từ khóa/hashtag</li></ul>
+        </div>
+      </div>
+      <h2>Ví dụ</h2>
+      <div class="card orange"><p><b>Tiêu đề bài:</b> Cách chọn cảm biến nhiệt độ cho nhà máy</p><p><b>Slug:</b> <code>cach-chon-cam-bien-nhiet-do</code></p><p><b>SEO title:</b> Cách chọn cảm biến nhiệt độ công nghiệp | ELH</p><p><b>SEO description:</b> Hướng dẫn chọn loại cảm biến nhiệt độ phù hợp theo dải đo, môi trường và yêu cầu lắp đặt trong nhà máy.</p></div>
+      <h2>Hashtag</h2>
+      <p>Hashtag mạng xã hội nằm trong <b>Thẻ (tag)</b>, ví dụ <code>#MayBomCongNghiep</code>. Hashtag không thay thế từ khóa SEO.</p>
+      <div class="callout red"><strong>Không tự thay đổi:</strong> Canonical URL và No index là thiết lập có thể làm trang biến mất khỏi Google hoặc tạo tín hiệu SEO sai. Hãy hỏi kỹ thuật nếu chưa chắc.</div>
+      <h2>Trước khi xuất bản</h2>
+      <ul class="check"><li>Đọc lại chính tả và thông tin liên hệ</li><li>Đối chiếu model/thông số kỹ thuật</li><li>Bấm thử liên kết</li><li>Xem cả desktop và mobile</li><li>Kiểm tra đúng loại bài và trạng thái Nổi bật</li></ul>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">09</span>
+    </section>
+
+    <section class="page">
+      <div class="eyebrow">Xuất bản & hỗ trợ</div>
+      <h1>Publish an toàn và xử lý lỗi</h1>
+      <div class="grid-2">
+        <div class="card blue"><h3>Sau khi Publish</h3><ol><li>Chờ website build lại trong vài phút.</li><li>Mở trang tương ứng trên elh.vn.</li><li>Nhấn Ctrl + F5 hoặc mở ẩn danh.</li><li>Kiểm tra chữ, ảnh, URL và liên kết.</li></ol></div>
+        <div class="card"><h3>Không thấy nội dung?</h3><ul><li>Kiểm tra đã Publish, không chỉ Save.</li><li>Kiểm tra đúng Loại bài.</li><li>Chờ build hoàn tất.</li><li>Kiểm tra danh sách nổi bật/thứ tự trang.</li></ul></div>
+      </div>
+      <h2>Lỗi thường gặp</h2>
+      <table>
+        <tr><th>Lỗi</th><th>Cách xử lý đầu tiên</th></tr>
+        <tr><td>Trang thêm nội dung trống/báo intent</td><td>Ctrl + F5, đóng tab lỗi và bấm lại</td></tr>
+        <tr><td>Không Publish được</td><td>Tìm trường bắt buộc; kiểm tra slug, ảnh, Alt text</td></tr>
+        <tr><td>Ảnh bị cắt xấu</td><td>Chỉnh Hotspot/Crop và dùng đúng tỷ lệ</td></tr>
+        <tr><td>Google Maps lỗi</td><td>Dùng đúng URL src từ “Nhúng bản đồ”</td></tr>
+      </table>
+      <h2>Khi báo lỗi, gửi đủ 6 thông tin</h2>
+      <ol><li>URL đang thao tác.</li><li>Tên bài/sản phẩm/dịch vụ/trang.</li><li>Đã Save hay Publish.</li><li>Thời điểm xảy ra lỗi.</li><li>Ảnh chụp toàn màn hình có thanh địa chỉ.</li><li>URL trên elh.vn nếu website chính chưa cập nhật.</li></ol>
+      <div class="callout"><strong>Nguyên tắc vàng:</strong> Tạo đúng loại → điền đủ trường → xem bản nháp → Publish → kiểm tra website chính.</div>
+      <p class="small">Không tự chỉnh DNS, Cloudflare Worker, GitHub Actions hoặc source code. Các thay đổi kỹ thuật cần chuyển cho người phụ trách website.</p>
+      <span class="brandline">ELH Content Studio</span><span class="page-no">10</span>
+    </section>
+  </body>
+</html>
