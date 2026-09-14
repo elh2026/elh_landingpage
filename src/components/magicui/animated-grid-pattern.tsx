@@ -34,14 +34,10 @@ export function A(p: P) {
   const i = I()
   const r = R(null)
   const [dim, setD] = S({ width: 0, height: 0 })
-  const [q, setQ] = S(() => z(ns))
+  const [q, setQ] = S(() => Array.from({ length: ns }, (_, k) => ({ id: k, pos: [0, 0] })))
 
   function g() {
     return [Math.floor((Math.random() * dim.width) / w), Math.floor((Math.random() * dim.height) / h)]
-  }
-
-  function z(c: number) {
-    return Array.from({ length: c }, (_, k) => ({ id: k, pos: g() }))
   }
 
   const u = (j: number) => {
@@ -49,20 +45,25 @@ export function A(p: P) {
   }
 
   E(() => {
-    if (dim.width && dim.height) setQ(z(ns))
-  }, [dim, ns])
-
-  E(() => {
     const obs = new ResizeObserver((e) => {
       for (const a of e) {
-        setD({ width: a.contentRect.width, height: a.contentRect.height })
+        const nextDim = { width: a.contentRect.width, height: a.contentRect.height }
+        setD(nextDim)
+        if (nextDim.width && nextDim.height) {
+          setQ(
+            Array.from({ length: ns }, (_, k) => ({
+              id: k,
+              pos: [Math.floor((Math.random() * nextDim.width) / w), Math.floor((Math.random() * nextDim.height) / h)],
+            })),
+          )
+        }
       }
     })
     if (r.current) obs.observe(r.current)
     return () => {
       if (r.current) obs.unobserve(r.current)
     }
-  }, [r])
+  }, [h, ns, w])
 
   return (
     <svg

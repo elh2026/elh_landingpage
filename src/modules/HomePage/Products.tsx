@@ -9,10 +9,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import Container from '@/components/Container'
 
 const Products = () => {
-  const prevRef1 = useRef(null)
-  const nextRef1 = useRef(null)
-  const prevRef2 = useRef(null)
-  const nextRef2 = useRef(null)
+  const prevRef1 = useRef<HTMLButtonElement>(null)
+  const nextRef1 = useRef<HTMLButtonElement>(null)
+  const prevRef2 = useRef<HTMLButtonElement>(null)
+  const nextRef2 = useRef<HTMLButtonElement>(null)
   // const data1 = [
   //   {
   //     image: '/images/xylem6.jpg',
@@ -99,13 +99,13 @@ const Products = () => {
           <div className="bg-primary-blue mt-1.5 hidden h-px w-full lg:block" />
           <div className="flex shrink-0 flex-wrap items-center gap-2">
             <p>Posco | Intermalt | Kenda | ChengLong |</p>
-            <button className="text-primary-orange uppercase">Xem tất cả</button>
+            <button className="text-[#a84f00] uppercase">Xem tất cả</button>
           </div>
         </div>
 
         <div className="mt-8">
           <div className="mb-4 flex items-center gap-x-4">
-            <button ref={prevRef1} className="swiper-button-prev">
+            <button ref={prevRef1} className="swiper-button-prev" aria-label="Xem đối tác trước">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={'100%'}
@@ -121,7 +121,7 @@ const Products = () => {
                 <path d="m15 18-6-6 6-6" />
               </svg>
             </button>
-            <button ref={nextRef1} className="swiper-button-next">
+            <button ref={nextRef1} className="swiper-button-next" aria-label="Xem đối tác tiếp theo">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={'100%'}
@@ -151,17 +151,13 @@ const Products = () => {
                 spaceBetween: 50,
               },
             }}
-            navigation={{
-              prevEl: prevRef1.current,
-              nextEl: nextRef1.current,
-            }}
-            onInit={(swiper) => {
-              // @ts-ignore
-              swiper.params.navigation.prevEl = prevRef1.current
-              // @ts-ignore
-              swiper.params.navigation.nextEl = nextRef1.current
-              swiper.navigation.init()
-              swiper.navigation.update()
+            navigation
+            onBeforeInit={(swiper) => {
+              const navigation = swiper.params.navigation
+              if (navigation && typeof navigation !== 'boolean') {
+                navigation.prevEl = prevRef1.current
+                navigation.nextEl = nextRef1.current
+              }
             }}
             modules={[Navigation]}
           >
@@ -203,7 +199,7 @@ const Products = () => {
 
         <div className="mt-8">
           <div className="mb-4 flex items-center gap-x-4">
-            <button ref={prevRef2} className="swiper-button-prev">
+            <button ref={prevRef2} className="swiper-button-prev" aria-label="Xem chứng chỉ trước">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={'100%'}
@@ -219,7 +215,7 @@ const Products = () => {
                 <path d="m15 18-6-6 6-6" />
               </svg>
             </button>
-            <button ref={nextRef2} className="swiper-button-next">
+            <button ref={nextRef2} className="swiper-button-next" aria-label="Xem chứng chỉ tiếp theo">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={'100%'}
@@ -252,17 +248,13 @@ const Products = () => {
                 spaceBetween: 50,
               },
             }}
-            navigation={{
-              prevEl: prevRef2.current,
-              nextEl: nextRef2.current,
-            }}
-            onInit={(swiper) => {
-              // @ts-ignore
-              swiper.params.navigation.prevEl = prevRef2.current
-              // @ts-ignore
-              swiper.params.navigation.nextEl = nextRef2.current
-              swiper.navigation.init()
-              swiper.navigation.update()
+            navigation
+            onBeforeInit={(swiper) => {
+              const navigation = swiper.params.navigation
+              if (navigation && typeof navigation !== 'boolean') {
+                navigation.prevEl = prevRef2.current
+                navigation.nextEl = nextRef2.current
+              }
             }}
             className="items-stretch!"
           >

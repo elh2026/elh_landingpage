@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import Container from '@/components/Container'
 import type { CmsService } from '@/sanity/types'
@@ -52,13 +53,19 @@ const Service = ({ title, services = [] }: { title?: string; services?: CmsServi
             {/*  */}
             <div>
               <p className="text-2xl font-semibold uppercase">{title || 'Dịch vụ chính của ELH'}</p>
-              <button className="text-primary-orange">Xem thêm</button>
+              <Link href="/services/" className="text-[#a84f00]">
+                Xem thêm
+              </Link>
             </div>
           </div>
           <div>
             <div className="relative hidden h-[300px] max-h-[300px] w-full lg:block">
               <Image
-                src={services[0]?.mainImage?.image ? urlFor(services[0].mainImage.image).width(1050).height(500).url() : '/images/machine.png'}
+                src={
+                  services[0]?.mainImage?.image
+                    ? urlFor(services[0].mainImage.image).width(1050).height(500).auto('format').quality(78).url()
+                    : '/images/machine.png'
+                }
                 width={1050}
                 height={200}
                 alt=""

@@ -30,11 +30,18 @@ export default async function About() {
         <Breadcrumb title="Giới thiệu" />
         <h2 className="text-title mt-8">{page.title}</h2>
         {page.lead && <p className="mt-5 text-lg font-semibold">{page.lead}</p>}
-        {page.body && <div className="mt-6"><PortableContent value={page.body} /></div>}
+        {page.body && (
+          <div className="mt-6">
+            <PortableContent value={page.body} />
+          </div>
+        )}
         {!!page.gallery?.length && (
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {page.gallery.map((item, index) => (
-              <figure key={`${item.image.asset._ref}-${index}`} className="relative aspect-[4/3] overflow-hidden rounded-xl">
+              <figure
+                key={`${item.image.asset._ref}-${index}`}
+                className="relative aspect-[4/3] overflow-hidden rounded-xl"
+              >
                 <Image
                   src={urlFor(item.image).width(900).height(675).url()}
                   fill
@@ -49,7 +56,7 @@ export default async function About() {
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {page.capabilities.map((item) => (
               <article key={item._key} className="rounded-xl bg-white p-6 shadow">
-                <h3 className="font-bold text-primary-orange">{item.title}</h3>
+                <h3 className="text-primary-orange font-bold">{item.title}</h3>
                 <p className="mt-3">{item.description}</p>
               </article>
             ))}

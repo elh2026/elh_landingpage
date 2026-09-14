@@ -13,7 +13,13 @@ const Footer = ({ settings }: { settings?: CmsSiteSettings | null }) => {
         <Container>
           <div className="flex flex-wrap items-center gap-x-16 gap-y-4">
             <div>
-              <Image src="/images/logo_elh_white.svg" width={153} height={85} alt="ELH" />
+              <Image
+                src="/images/logo_elh_white.svg"
+                width={153}
+                height={85}
+                className="h-[85px] w-[153px]"
+                alt="ELH"
+              />
             </div>
             <div className="space-y-4">
               <div className="flex items-center gap-x-2">
@@ -69,8 +75,14 @@ const Footer = ({ settings }: { settings?: CmsSiteSettings | null }) => {
                     <Image src="/icons/mail.svg" width={15} height={15} alt="Phone" />
                   </div>
                   <div>
-                    Email: <Link href={`mailto:${settings?.contactEmail || 'info@elh.vn'}`}>{settings?.contactEmail || 'info@elh.vn'}</Link> /{' '}
-                    <Link href={`mailto:${settings?.salesEmail || 'sales@elh.vn'}`}>{settings?.salesEmail || 'sales@elh.vn'}</Link>
+                    Email:{' '}
+                    <Link href={`mailto:${settings?.contactEmail || 'info@elh.vn'}`}>
+                      {settings?.contactEmail || 'info@elh.vn'}
+                    </Link>{' '}
+                    /{' '}
+                    <Link href={`mailto:${settings?.salesEmail || 'sales@elh.vn'}`}>
+                      {settings?.salesEmail || 'sales@elh.vn'}
+                    </Link>
                   </div>
                 </div>
                 <div className="flex items-center gap-x-4">
@@ -90,8 +102,15 @@ const Footer = ({ settings }: { settings?: CmsSiteSettings | null }) => {
                 <ul className="nav [&>li]:relative [&>li]:pb-1 [&>li]:pl-6 [&>li::before]:absolute [&>li::before]:top-0.5 [&>li::before]:left-0 [&>li::before]:content-['»']">
                   {(settings?.salesPolicies?.length
                     ? settings.salesPolicies
-                    : ['Chính sách bảo hành sản phẩm', 'Chính sách bảo mật thông tin', 'Quy trình giao hàng', 'Chính sách đổi trả hàng']
-                  ).map((policy) => <li key={policy}>{policy}</li>)}
+                    : [
+                        'Chính sách bảo hành sản phẩm',
+                        'Chính sách bảo mật thông tin',
+                        'Quy trình giao hàng',
+                        'Chính sách đổi trả hàng',
+                      ]
+                  ).map((policy) => (
+                    <li key={policy}>{policy}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -115,7 +134,7 @@ const Footer = ({ settings }: { settings?: CmsSiteSettings | null }) => {
           </div>
         </Container>
       </div>
-      <div className="bg-primary-orange grid border-t border-white py-4 text-white">
+      <div className="grid border-t border-white bg-[#a84f00] py-4 text-white">
         <div className="m-auto flex items-center gap-x-2">
           <p>{settings?.copyrightText || '©Copyright By ELH.'} Designed By</p>
           <div>

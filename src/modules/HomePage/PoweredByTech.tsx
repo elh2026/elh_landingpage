@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import Image from 'next/image'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import Container from '@/components/Container'
 import { cn } from '@/lib/utils'
@@ -424,20 +424,24 @@ export const meihe = [
 
 const PoweredByTech = ({ title }: { title?: string }) => {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const params = searchParams.get('product') || ''
 
   const convertIndex = (params: string) => {
-    if (params === 'janastic') return 0
+    if (params === 'janastic' || params === 'janatics') return 0
     if (params === 'tempco') return 1
     if (params === 'cutflex') return 2
     if (params === 'meihe') return 3
     return 0
   }
-  const [index, setIndex] = useState<number>(convertIndex(params))
+  const [index, setIndex] = useState<number>(0)
   useEffect(() => {
-    setIndex(convertIndex(params))
-  }, [params])
+    const selectFromUrl = () => {
+      setIndex(convertIndex(new URLSearchParams(window.location.search).get('product') || ''))
+    }
+
+    selectFromUrl()
+    window.addEventListener('popstate', selectFromUrl)
+    return () => window.removeEventListener('popstate', selectFromUrl)
+  }, [])
 
   return (
     <section id="powered">
@@ -469,7 +473,7 @@ const PoweredByTech = ({ title }: { title?: string }) => {
               >
                 <Image
                   className={cn({ 'rounded-lg': i === index })}
-                  src={`/images/tech-${i + 1}.png`}
+                  src={`/images/tech-${i + 1}.webp`}
                   width={350}
                   height={337}
                   alt="Technology"
@@ -592,7 +596,7 @@ const PoweredByTech = ({ title }: { title?: string }) => {
           <div className="flex items-center justify-between">
             <div className="font-iCielGotham">
               <p className="text-2xl font-bold text-[#10415d] uppercase">{title || 'ELH Technology'}</p>
-              <p className="text-primary-orange text-lg font-medium">Every Little Helps</p>
+              <p className="text-lg font-medium text-[#a84f00]">Every Little Helps</p>
             </div>
             <div className="flex items-center gap-x-4">
               <div>

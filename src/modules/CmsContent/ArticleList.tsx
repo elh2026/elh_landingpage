@@ -2,16 +2,39 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import Container from '@/components/Container'
+import { getSanityCreateUrl, type CreateTemplateId } from '@/lib/sanityIntent'
 import { urlFor } from '@/sanity/image'
 import type { CmsArticleSummary } from '@/sanity/types'
 
-export default function ArticleList({ articles, title }: { articles: CmsArticleSummary[]; title: string }) {
+export default function ArticleList({
+  articles,
+  title,
+  createTemplate,
+  createLabel = 'Thêm bài viết',
+}: {
+  articles: CmsArticleSummary[]
+  title: string
+  createTemplate?: CreateTemplateId
+  createLabel?: string
+}) {
+  const showCreateButton = process.env.ELH_PREVIEW_BUILD === 'true' && createTemplate
+
   return (
     <main className="py-10">
       <Container>
-        <div className="mb-8 flex items-center gap-3">
+        <div className="mb-8 flex flex-wrap items-center gap-3">
           <h1 className="text-2xl font-semibold uppercase">{title}</h1>
           <div className="bg-primary-blue h-px flex-1" />
+          {showCreateButton ? (
+            <a
+              href={getSanityCreateUrl(createTemplate)}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-[#a84f00] px-4 py-2 text-sm font-semibold text-white"
+            >
+              + {createLabel}
+            </a>
+          ) : null}
         </div>
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
           {articles.map((article) => (

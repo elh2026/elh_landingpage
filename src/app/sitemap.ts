@@ -6,7 +6,17 @@ export const dynamic = 'force-static'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [products, articles] = await Promise.all([getPublishedProducts(), getPublishedArticles()])
-  const staticPages = ['', 'about', 'catalog', 'contact', 'featured-news', 'news-&-event', 'products', 'services']
+  const staticPages = [
+    '',
+    'about',
+    'catalog',
+    'contact',
+    'featured-news',
+    'news-%26-event',
+    'products',
+    'recruitment',
+    'services',
+  ]
 
   return [
     ...staticPages.map((path) => ({

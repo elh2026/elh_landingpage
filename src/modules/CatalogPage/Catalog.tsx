@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -23,10 +23,9 @@ const Catalog = () => {
     if (params === 'igus') return 4
     return 0
   }
-  const [index, setIndex] = useState<number>(convertIndex(params))
-  useEffect(() => {
-    setIndex(convertIndex(params))
-  }, [params])
+  const [selection, setSelection] = useState(() => ({ source: params, index: convertIndex(params) }))
+  const index = selection.source === params ? selection.index : convertIndex(params)
+  const setIndex = (nextIndex: number) => setSelection({ source: params, index: nextIndex })
 
   const data = [
     {

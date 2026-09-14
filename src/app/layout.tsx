@@ -64,6 +64,7 @@ export default async function RootLayout({
   return (
     <html lang="vi">
       <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
             __html: `history.scrollRestoration = 'manual'`,

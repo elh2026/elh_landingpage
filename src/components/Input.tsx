@@ -9,11 +9,12 @@ interface PropsInput extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input: React.FC<PropsInput> = ({ label, id, className = '', error, disabled, value, ...rest }) => {
   const isActive = !!value
+  const inputId = id || rest.name
 
   return (
     <div className="relative">
       <input
-        id={id}
+        id={inputId}
         disabled={disabled}
         value={value}
         placeholder=" "
@@ -26,7 +27,7 @@ const Input: React.FC<PropsInput> = ({ label, id, className = '', error, disable
         {...rest}
       />
       <label
-        htmlFor={id}
+        htmlFor={inputId}
         className={cn(
           'text-md absolute top-4 left-6 z-10 origin-[0] transform duration-150',
           isActive || rest.placeholder === ''

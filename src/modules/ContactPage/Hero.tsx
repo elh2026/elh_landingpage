@@ -53,11 +53,15 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
 
             <div className="relative flex h-full w-3/5 flex-col gap-y-8 py-8 text-white lg:gap-y-20">
               <div className="flex items-center gap-x-2">
-                <p className="text-title shrink-0">{content?.heroTitle || content?.formTitle || 'Liên hệ làm đại lý'}</p>
+                <p className="text-title shrink-0">
+                  {content?.heroTitle || content?.formTitle || 'Liên hệ làm đại lý'}
+                </p>
                 <div className="mt-1.5 h-1 w-full bg-white/10" />
               </div>
 
-              {content?.formDescription && <p className="-mt-14 max-w-2xl text-sm lg:text-base">{content.formDescription}</p>}
+              {content?.formDescription && (
+                <p className="-mt-14 max-w-2xl text-sm lg:text-base">{content.formDescription}</p>
+              )}
 
               <div className="flex-1 shrink-0">
                 <p className="text-lg font-semibold uppercase lg:text-xl">
@@ -90,8 +94,14 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
                       <Image src="/icons/mail.svg" width={15} height={15} alt="Phone" />
                     </div>
                     <div>
-                      Email: <Link href={`mailto:${settings?.contactEmail || 'info@elh.vn'}`}>{settings?.contactEmail || 'info@elh.vn'}</Link> /{' '}
-                      <Link href={`mailto:${settings?.salesEmail || 'sales@elh.vn'}`}>{settings?.salesEmail || 'sales@elh.vn'}</Link>
+                      Email:{' '}
+                      <Link href={`mailto:${settings?.contactEmail || 'info@elh.vn'}`}>
+                        {settings?.contactEmail || 'info@elh.vn'}
+                      </Link>{' '}
+                      /{' '}
+                      <Link href={`mailto:${settings?.salesEmail || 'sales@elh.vn'}`}>
+                        {settings?.salesEmail || 'sales@elh.vn'}
+                      </Link>
                     </div>
                   </div>
                   <div className="flex items-center gap-x-4">
@@ -106,7 +116,7 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
               </div>
 
               <div className="">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form id="contact-page-form" onSubmit={handleSubmit(onSubmit)}>
                   <div className="[&_label]:text-primary-blue grid gap-x-4 gap-y-8 lg:grid-cols-2">
                     <Controller
                       name="fullname"
@@ -175,13 +185,17 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
       </div>
       <Container className="pb-32">
         <div className="mt-4 flex items-center gap-x-2">
-          <button type="submit" className="bg-primary-orange rounded-sm px-2 py-1 text-white uppercase">
+          <button
+            form="contact-page-form"
+            type="submit"
+            className="rounded-sm bg-[#a84f00] px-2 py-1 text-white uppercase"
+          >
             Gửi
           </button>
           <button
             type="button"
             onClick={() => reset()}
-            className="bg-primary-orange rounded-sm px-2 py-1 text-white uppercase"
+            className="rounded-sm bg-[#a84f00] px-2 py-1 text-white uppercase"
           >
             Nhập lại
           </button>
@@ -193,6 +207,7 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
               <div>
                 <iframe
                   src={getGoogleMapsEmbedUrl(content?.mapEmbedUrl)}
+                  title="Bản đồ vị trí Công ty ELH"
                   width={'100%'}
                   height={'100%'}
                   className="h-[200px] w-full border-0 xl:h-96 xl:w-11/12"
@@ -200,8 +215,6 @@ const Hero = ({ content, settings }: { content?: CmsContactPage | null; settings
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
-
-
               </div>
             </div>
           </div>

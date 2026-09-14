@@ -65,13 +65,13 @@ const Contact = ({ title, mapEmbedUrl }: { title?: string; mapEmbedUrl?: string 
               </div>
 
               <div className="mt-4 flex items-center justify-center gap-x-2 xl:justify-end">
-                <button type="submit" className="bg-primary-orange rounded-sm px-2 py-1 text-white uppercase">
+                <button type="submit" className="rounded-sm bg-[#a84f00] px-2 py-1 text-white uppercase">
                   Gửi
                 </button>
                 <button
                   type="button"
                   onClick={() => reset()}
-                  className="bg-primary-orange rounded-sm px-2 py-1 text-white uppercase"
+                  className="rounded-sm bg-[#a84f00] px-2 py-1 text-white uppercase"
                 >
                   Nhập lại
                 </button>
@@ -83,6 +83,7 @@ const Contact = ({ title, mapEmbedUrl }: { title?: string; mapEmbedUrl?: string 
             <div>
               <iframe
                 src={getGoogleMapsEmbedUrl(mapEmbedUrl)}
+                title="Bản đồ vị trí Công ty ELH"
                 width={'100%'}
                 height={'100%'}
                 className="h-[200px] w-full border-0 xl:w-[500px]"

@@ -218,10 +218,24 @@ const Header = ({ settings }: { settings?: CmsSiteSettings | null }) => {
             <NavbarMobile data={nav} handleClick={handleClick} />
             <div className="grid grid-cols-2 gap-x-4">
               <div className="text-primary-orange font-semibold text-nowrap">Danh mục sản phẩm</div>
-              <div className="flex items-center gap-x-2 rounded bg-white p-1">
+              <form
+                action="/products/"
+                method="get"
+                role="search"
+                className="flex items-center gap-x-2 rounded bg-white p-1"
+              >
                 <LuTextSearch className="text-lg" />
-                <input type="text" className="placeholder:text-primary-blue/70 outline-0" placeholder="Tìm kiếm..." />
-              </div>
+                <label htmlFor="product-search" className="sr-only">
+                  Tìm kiếm sản phẩm
+                </label>
+                <input
+                  id="product-search"
+                  name="search"
+                  type="search"
+                  className="placeholder:text-primary-blue/70 outline-0"
+                  placeholder="Tìm kiếm..."
+                />
+              </form>
             </div>
           </div>
         </Container>
@@ -229,11 +243,20 @@ const Header = ({ settings }: { settings?: CmsSiteSettings | null }) => {
 
       <div className="bg-white">
         <Container>
-          <div className="text-elh-gray py-4">
+          <div className="py-4 text-[#595959]">
             <span className="font-semibold">Top Tags:</span>{' '}
             {(settings?.topTags?.length
               ? settings.topTags
-              : ['Cảm biến nhiệt độ', 'Đồng hồ lưu lượng', 'Bơm hoá chất', 'Đá cắt', 'Bạc lót, vòng bi nhựa, ray trượt không dầu', 'Ổ cắm', 'Tủ điện chống cháy nổ', 'Khí nén']
+              : [
+                  'Cảm biến nhiệt độ',
+                  'Đồng hồ lưu lượng',
+                  'Bơm hoá chất',
+                  'Đá cắt',
+                  'Bạc lót, vòng bi nhựa, ray trượt không dầu',
+                  'Ổ cắm',
+                  'Tủ điện chống cháy nổ',
+                  'Khí nén',
+                ]
             ).join(' | ')}
           </div>
         </Container>

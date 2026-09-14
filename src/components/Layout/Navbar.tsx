@@ -33,6 +33,7 @@ const NavBar = ({ data, handleClick }: IProps) => {
   const [subHover, setSubHover] = useState<string | null>(null)
   const [subClosing, setSubClosing] = useState<string | null>(null)
   const [isSubClosingDone, setIsSubClosingDone] = useState<boolean>(true)
+  const safeHref = (href: string) => (href && href !== '#' ? href : '/products/')
 
   const handleEnter = (label: string) => {
     if (!isSubClosingDone && hover !== label) return
@@ -87,7 +88,7 @@ const NavBar = ({ data, handleClick }: IProps) => {
                 ) : null}
               </button>
             ) : (
-              <Link href={href} className="flex items-center">
+              <Link href={safeHref(href)} className="flex items-center">
                 {label}
                 {children?.length ? (
                   <span
@@ -124,7 +125,7 @@ const NavBar = ({ data, handleClick }: IProps) => {
                         {item.clickable ? (
                           <button onClick={() => handleClick(item.href)}>{item.label}</button>
                         ) : (
-                          <Link href={item.href}>{item.label}</Link>
+                          <Link href={safeHref(item.href)}>{item.label}</Link>
                         )}
                         {hasSub && (
                           <span className="ml-1 rotate-90">
@@ -143,7 +144,7 @@ const NavBar = ({ data, handleClick }: IProps) => {
                         >
                           {item.children?.map((subItem) => (
                             <li key={subItem.label} className="py-1">
-                              <Link href={subItem.href}>{subItem.label}</Link>
+                              <Link href={safeHref(subItem.href)}>{subItem.label}</Link>
                             </li>
                           ))}
                         </ul>

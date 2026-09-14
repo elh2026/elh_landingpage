@@ -35,6 +35,7 @@ const NavbarMobile = ({ data, handleClick }: IProps) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
+  const safeHref = (href: string) => (href && href !== '#' ? href : '/products/')
 
   useClickOutside(navbarRef, () => {
     setOpen(false)
@@ -48,7 +49,7 @@ const NavbarMobile = ({ data, handleClick }: IProps) => {
     if (isSub) {
       toggle(label)
     } else {
-      router.push(href)
+      router.push(safeHref(href))
       setOpen(false)
     }
   }
@@ -74,11 +75,12 @@ const NavbarMobile = ({ data, handleClick }: IProps) => {
         >
           {data.map(({ label, href, children, clickable }) => (
             <div key={label} className="mb-2">
-              <div
+              <button
+                type="button"
                 onClick={() => {
                   clickable ? handleClick(href) : handleOpenSubMenu(!!children?.length, label, href)
                 }}
-                className="flex items-center justify-between"
+                className="flex w-full items-center justify-between text-left"
               >
                 <p className={`text-xl ${pathname === href ? 'text-primary-orange' : ''}`}>{label}</p>
                 {children?.length ? (
@@ -88,24 +90,25 @@ const NavbarMobile = ({ data, handleClick }: IProps) => {
                     />
                   </p>
                 ) : null}
-              </div>
+              </button>
 
               {children?.length && expanded[label] && (
                 <ul className="mt-2 ml-4 space-y-2">
                   {children.map((item) => (
                     <li key={item.label}>
                       {item.children?.length ? (
-                        <div
+                        <button
+                          type="button"
                           onClick={() => {
                             item.clickable ? handleClick(item.href) : toggle(item.label)
                           }}
-                          className="flex cursor-pointer items-center justify-between"
+                          className="flex w-full cursor-pointer items-center justify-between text-left"
                         >
                           <span className={`${pathname === item.href ? 'text-primary-orange' : ''}`}>{item.label}</span>
                           <MdChevronRight
                             className={`transition-transform ${expanded[item.label] ? 'rotate-[270deg]' : 'rotate-90'}`}
                           />
-                        </div>
+                        </button>
                       ) : item.clickable ? (
                         <button
                           onClick={() => {
@@ -118,11 +121,11 @@ const NavbarMobile = ({ data, handleClick }: IProps) => {
                         </button>
                       ) : (
                         <Link
-                          href={item.href}
-                          passHref
+                          href={safeHref(item.href)}
+                          onClick={() => setOpen(false)}
                           className={`block ${pathname === item.href ? 'text-primary-orange' : ''}`}
                         >
-                          <button onClick={() => setOpen(false)}>{item.label}</button>
+                          {item.label}
                         </Link>
                       )}
 
@@ -131,11 +134,11 @@ const NavbarMobile = ({ data, handleClick }: IProps) => {
                           {item.children.map((subItem) => (
                             <li key={subItem.label}>
                               <Link
-                                href={subItem.href}
-                                passHref
+                                href={safeHref(subItem.href)}
+                                onClick={() => setOpen(false)}
                                 className={`${pathname === subItem.href ? 'text-primary-orange' : ''}`}
                               >
-                                <button onClick={() => setOpen(false)}>{subItem.label}</button>
+                                {subItem.label}
                               </Link>
                             </li>
                           ))}

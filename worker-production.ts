@@ -4,9 +4,20 @@ type Env = {
   }
 }
 
-export default {
+const worker = {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const response = await env.ASSETS.fetch(request)
+    let response = await env.ASSETS.fetch(request)
+
+    if (response.status === 404) {
+      const url = new URL(request.url)
+      if (url.pathname.includes('__next.') && url.pathname.endsWith('.__PAGE__.txt')) {
+        url.pathname = url.pathname
+          .replace(/\.(?:\$d\$|%24d%24)/gi, '/$d$')
+          .replace(/\.__PAGE__\.txt$/, '/__PAGE__.txt')
+        response = await env.ASSETS.fetch(new Request(url, request))
+      }
+    }
+
     const contentType = response.headers.get('content-type') || ''
 
     if (!contentType.includes('text/html')) return response
@@ -21,3 +32,5 @@ export default {
     })
   },
 }
+
+export default worker

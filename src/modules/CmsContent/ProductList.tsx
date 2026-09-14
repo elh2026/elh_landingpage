@@ -1,3 +1,6 @@
+'use client'
+
+import { useMemo, useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -6,6 +9,22 @@ import { urlFor } from '@/sanity/image'
 import type { CmsProductSummary } from '@/sanity/types'
 
 export default function ProductList({ products }: { products: CmsProductSummary[] }) {
+  const searchTerm = useSyncExternalStore(
+    () => () => undefined,
+    () => new URLSearchParams(window.location.search).get('search')?.trim() || '',
+    () => '',
+  )
+  const visibleProducts = useMemo(() => {
+    const normalizedQuery = searchTerm.toLocaleLowerCase('vi')
+    return normalizedQuery
+      ? products.filter((product) =>
+          [product.title, product.model, product.sku, product.brand?.name, product.shortDescription]
+            .filter(Boolean)
+            .some((value) => value!.toLocaleLowerCase('vi').includes(normalizedQuery)),
+        )
+      : products
+  }, [products, searchTerm])
+
   return (
     <main className="py-10">
       <Container>
@@ -14,11 +33,15 @@ export default function ProductList({ products }: { products: CmsProductSummary[
           <div className="bg-primary-blue h-px flex-1" />
         </div>
 
-        {products.length === 0 ? (
-          <div className="rounded-2xl bg-white p-8 text-center">Danh sách sản phẩm đang được cập nhật.</div>
+        {searchTerm ? <p className="mb-6">Kết quả tìm kiếm cho “{searchTerm}”</p> : null}
+
+        {visibleProducts.length === 0 ? (
+          <div className="rounded-2xl bg-white p-8 text-center">
+            {searchTerm ? 'Không tìm thấy sản phẩm phù hợp.' : 'Danh sách sản phẩm đang được cập nhật.'}
+          </div>
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((product) => (
+            {visibleProducts.map((product) => (
               <Link
                 key={product._id}
                 href={`/products/${product.slug}/`}
