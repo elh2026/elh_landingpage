@@ -62,6 +62,12 @@ export const getFeaturedArticles = () =>
     {},
     [],
   )
+export const getAllPublishedArticles = () =>
+  safeFetch<CmsArticleSummary[]>(
+    `*[_type == "article"] | order(publishedAt desc,_updatedAt desc) ${articleSummaryProjection}`,
+    {},
+    [],
+  )
 export const getRecruitmentArticles = () =>
   safeFetch<CmsArticleSummary[]>(
     `*[_type == "article" && section == "recruitment"] | order(publishedAt desc,_updatedAt desc) ${articleSummaryProjection}`,

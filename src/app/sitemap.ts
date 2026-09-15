@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next'
 
-import { getPublishedArticles, getPublishedProducts } from '@/sanity/queries'
+import { getAllPublishedArticles, getPublishedProducts } from '@/sanity/queries'
 
 export const dynamic = 'force-static'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, articles] = await Promise.all([getPublishedProducts(), getPublishedArticles()])
+  const [products, articles] = await Promise.all([getPublishedProducts(), getAllPublishedArticles()])
   const staticPages = [
     '',
     'about',
