@@ -52,7 +52,7 @@ export const getPublishedProduct = (slug: string) =>
 
 export const getPublishedArticles = () =>
   safeFetch<CmsArticleSummary[]>(
-    `*[_type == "article" && coalesce(section,"news") == "news"] | order(featured desc,publishedAt desc,_updatedAt desc) ${articleSummaryProjection}`,
+    `*[_type == "article" && coalesce(section,"news") == "news" && coalesce(featured,false) != true] | order(publishedAt desc,_updatedAt desc) ${articleSummaryProjection}`,
     {},
     [],
   )
