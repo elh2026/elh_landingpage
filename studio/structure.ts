@@ -45,7 +45,14 @@ export const structure: StructureResolver = (S) =>
                 .child(filteredList(S, 'Đã xuất bản', `_type == "article" && !(_id in path("drafts.**"))`, 'article-news')),
               S.listItem()
                 .title('Tin tức & sự kiện')
-                .child(filteredList(S, 'Tin tức & sự kiện', `_type == "article" && section != "recruitment"`, 'article-news')),
+                .child(
+                  filteredList(
+                    S,
+                    'Tin tức & sự kiện',
+                    `_type == "article" && section != "recruitment" && coalesce(featured, false) != true`,
+                    'article-news',
+                  ),
+                ),
               S.listItem()
                 .title('Tin nổi bật')
                 .child(filteredList(S, 'Tin nổi bật', `_type == "article" && featured == true`, 'article-featured')),
